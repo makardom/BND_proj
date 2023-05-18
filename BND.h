@@ -55,6 +55,14 @@ private:
         return start;
     }
 
+    int checkSection(unsigned int a, const unsigned int offsets[]) const{
+        for(int i=0; i<Catamount; i++){
+            if (a==offsets[i])
+                return i;
+        }
+        return -1;
+    }
+
     void switchData(int a, int b){
         int tmp = *(DataArea+a);
         *(DataArea+a) = *(DataArea+b);
@@ -139,8 +147,26 @@ public:
     //дописать, т.к. не определился как данные перемещать
     void reorganization(){
         unsigned int offsets[Catamount];
+        unsigned int lengths = 0;
         for (int i=0; i<Catamount; i++){
             offsets[i] = (catalog.getRecords()+i)->getOffset();
+            lengths += (catalog.getRecords()+i)->getLength();
+        }
+        if(lengths==CatOffset)
+            throw Error("Impossible to reorganize DataArea");
+        for(int i=0; i<CatOffset-lengths; i++) //обходим столько раз, сколько свободных ячеек в DataArea
+        {
+            unsigned int nol = 0;
+            while(*(DataArea+nol)!=0){
+                nol++;
+            }
+            while (nol!=CatOffset-2){
+                if(*(DataArea+nol+1)==1)
+                {
+                    (catalog.getRecords()+checkSection(nol+1, offsets))->setOffset(nol);
+                }
+                switchData(nol, nol+1);
+            }
         }
 
     }
