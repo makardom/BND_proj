@@ -201,6 +201,24 @@ public:
         for(auto &i : namevec)
             cout<<i<<endl;
     }
+
+    void DeleteSection(const string& SecName){
+        if (SecName.length()>10){
+            throw Error("Name is too long");
+        }
+        char *namesec = new char[SecName.length()];
+        for(int i=0; i<SecName.length(); i++){
+            *(namesec+i) = SecName[i];
+        }
+        unsigned int start =  catalog.searchRecordByName(namesec)->getOffset();
+        unsigned int len =  catalog.searchRecordByName(namesec)->getLength();
+        for(unsigned int i=start; i<start+len-1; i++){
+            *(DataArea+i) = 0;
+        }
+        catalog.searchRecordByName(namesec)->DeleteThisUnit();
+        Catamount--;
+    }
+
 };
 
 

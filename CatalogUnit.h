@@ -11,7 +11,7 @@ using namespace std;
 
 class CatalogUnit {
 private:
-    char name[10]{'0'};
+    char name[10]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0'};
 //    bool isMain;
     unsigned int offset;
     unsigned int length;
@@ -60,6 +60,14 @@ public:
 
     unsigned int getLength() const {
         return length;
+    }
+
+    void DeleteThisUnit(){
+        for(char & i : name){
+            i = '\0';
+        }
+        offset = 0;
+        length = 0;
     }
 
     void print() {
