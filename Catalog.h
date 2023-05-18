@@ -53,6 +53,10 @@ public:
         }
         return nullptr;
     }
+
+    CatalogUnit *getRecords() const {
+        return records;
+    }
 };
 
 

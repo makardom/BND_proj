@@ -11,7 +11,7 @@ using namespace std;
 
 class CatalogUnit {
 private:
-    char name[10]{};
+    char name[10]{0};
 //    bool isMain;
     unsigned int offset;
     unsigned int length;
@@ -54,16 +54,16 @@ public:
 //        return isMain;
 //    }
 
-    int getOffset() const {
+    unsigned int getOffset() const {
         return offset;
     }
 
-    int getLength() const {
+    unsigned int getLength() const {
         return length;
     }
 
     void print() {
-        cout << name << " " << offset << " " << length << endl;
+        cout << name << " " << offset << " " << length;
     }
 };
 

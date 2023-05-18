@@ -53,6 +53,13 @@ private:
         }
         return start;
     }
+
+    void switchData(int a, int b){
+        int tmp = *(DataArea+a);
+        *(DataArea+a) = *(DataArea+b);
+        *(DataArea+b) = tmp;
+    }
+
 public:
     BND(string name, unsigned short catOffset, unsigned short catamount) : Name(std::move(name)), CatOffset(catOffset), Catamount(catamount) {
         DataArea = new int[catOffset]{0};
@@ -95,6 +102,14 @@ public:
         Name = name;
     }
 
+    void print(){
+        cout<<Name<<"LB"<<CatOffset<<Catamount;
+        for(int i=0; i<CatOffset; i++)
+            cout<<*(DataArea+i);
+        catalog.print();
+        cout<<endl;
+    }
+
     static BND create(const string &name, unsigned short catamount, unsigned short dataamount){
         return {name, dataamount, catamount};
     }
@@ -118,13 +133,60 @@ public:
                 *(DataArea+i)=BLOCK;
             }
             CatalogUnit newCatU(name, num, length);
+            catalog.addRecord(newCatU);
         }
     }
-
+    //дописать, т.к. не определился как данные перемещать
     void reorganization(){
+        unsigned int offsets[Catamount];
+        for (int i=0; i<Catamount; i++){
+            offsets[i] = (catalog.getRecords()+i)->getOffset();
+        }
 
     }
 
+    void Delete(){
+        Name.clear();
+        Catamount = 0;
+        CatOffset = 0;
+        delete[] DataArea;
+        DataArea = nullptr;
+        catalog.Catalog::~Catalog();
+    }
+
+    void renameCatalog(string oldname, string newname){
+        if (newname.length()>10){
+            throw Error("New Name is too long");
+        }
+        if (oldname.length()>10){
+            throw Error("Name is too long");
+        }
+        char *oldname1 = new char[oldname.length()];
+        for(int i=0; i<oldname.length(); i++){
+            *(oldname1+i) = oldname[i];
+        }
+        char *newname1 = new char[newname.length()];
+        for(int i=0; i<newname.length(); i++){
+            *(newname1+i) = newname[i];
+        }
+        catalog.searchRecordByName(oldname1)->setName(newname1);
+        delete[] oldname1;
+        delete[] newname1;
+    }
+
+    void OutFreeSpace(){
+        int kol = 0;
+        for(int i=0; i<CatOffset; i++){
+            if (*(DataArea+i)==0)
+                kol++;
+        }
+        cout<<"Amount free space: "<<kol<<endl;
+    }
+
+    void printCatalog(){
+        catalog.print();
+        cout<<endl;
+    }
 };
 
 
