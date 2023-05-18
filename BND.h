@@ -144,7 +144,7 @@ public:
             catalog.addRecord(newCatU);
         }
     }
-    //дописать, т.к. не определился как данные перемещать
+    //очень тщательно проверять
     void reorganization(){
         unsigned int offsets[Catamount];
         unsigned int lengths = 0;
