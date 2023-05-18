@@ -2,6 +2,7 @@
 // Created by Makar on 10.05.2023.
 //
 #include <utility>
+#include <vector>
 
 #include "Catalog.h"
 
@@ -59,7 +60,6 @@ private:
         *(DataArea+a) = *(DataArea+b);
         *(DataArea+b) = tmp;
     }
-
 public:
     BND(string name, unsigned short catOffset, unsigned short catamount) : Name(std::move(name)), CatOffset(catOffset), Catamount(catamount) {
         DataArea = new int[catOffset]{0};
@@ -78,7 +78,7 @@ public:
         return CatOffset;
     }
 
-    unsigned short getCatamount() const {
+    unsigned short getCatamount() const { // Library Fragmentation
         return Catamount;
     }
 
@@ -186,6 +186,20 @@ public:
     void printCatalog(){
         catalog.print();
         cout<<endl;
+    }
+
+    void OutSectionAlphabet(){
+        string names[Catamount];
+        for (int i=0; i<Catamount; i++){
+            for (int j=0; j<10; j++)
+                names[i].push_back((catalog.getRecords()+i)->getName()[j]);
+        }
+        vector<string> namevec;
+        for(auto &i : names)
+            namevec.push_back(i);
+        sort(namevec.begin(), namevec.end());
+        for(auto &i : namevec)
+            cout<<i<<endl;
     }
 };
 

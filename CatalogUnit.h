@@ -11,7 +11,7 @@ using namespace std;
 
 class CatalogUnit {
 private:
-    char name[10]{0};
+    char name[10]{'0'};
 //    bool isMain;
     unsigned int offset;
     unsigned int length;
