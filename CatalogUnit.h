@@ -12,20 +12,20 @@ using namespace std;
 class CatalogUnit {
 private:
     char name[10]{};
-    bool isMain;
-    int offset;
-    int length;
+//    bool isMain;
+    unsigned int offset;
+    unsigned int length;
 public:
     CatalogUnit() {
         strcpy(name, "");
-        isMain = false;
+//        isMain = false;
         offset = 0;
         length = 0;
     }
 
-    CatalogUnit(const char* n, bool m, int o, int l) {
+    CatalogUnit(const char* n, unsigned int o, unsigned int l) {
         strcpy(name, n);
-        isMain = m;
+//        isMain = m;
         offset = o;
         length = l;
     }
@@ -34,9 +34,9 @@ public:
         strcpy(name, n);
     }
 
-    void setMain(bool m) {
-        isMain = m;
-    }
+//    void setMain(bool m) {
+//        isMain = m;
+//    }
 
     void setOffset(int o) {
         offset = o;
@@ -50,9 +50,9 @@ public:
         return name;
     }
 
-    bool isMainCatalog() const {
-        return isMain;
-    }
+//    bool isMainCatalog() const {
+//        return isMain;
+//    }
 
     int getOffset() const {
         return offset;
@@ -63,7 +63,7 @@ public:
     }
 
     void print() {
-        cout << name << " " << isMain << " " << offset << " " << length << endl;
+        cout << name << " " << offset << " " << length << endl;
     }
 };
 
