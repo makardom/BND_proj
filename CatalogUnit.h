@@ -71,7 +71,10 @@ public:
     }
 
     void print() {
-        cout << name << " " << offset << " " << length;
+        for(int i=0; i<10; i++){
+            cout<<name[i];
+        }
+        cout << " " << offset << " " << length;
     }
 };
 

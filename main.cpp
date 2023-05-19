@@ -38,10 +38,10 @@ int main() {
                 cout << "Enter the amount of data:";
                 int dataamount;
                 cin >> dataamount;
-                //bnd = BND::create(name, catamount, dataamount);
-                bnd.setName(name);
-                bnd.setCatamount(catamount);
-                bnd.setCatOffset(dataamount);
+                bnd.create(name, catamount, dataamount);
+//                bnd.setName(name);
+//                bnd.setCatamount(catamount);
+//                bnd.setCatOffset(dataamount);
                 cout << "BND has been created!" << endl;
                 break;
             }
@@ -87,6 +87,7 @@ int main() {
                 break;
             }
             case 4: {
+                ::getchar();
                 cout << "Enter name: ";
                 string catname;
                 getline(cin, catname);
@@ -144,6 +145,7 @@ int main() {
                 bnd.OutSectionAlphabet();
             }
             case 11:{
+                ::getchar();
                 cout << "Enter section name: ";
                 string sectionName;
                 getline(cin, sectionName);

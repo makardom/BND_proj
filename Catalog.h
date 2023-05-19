@@ -35,13 +35,18 @@ public:
     }
 
     void addRecord(CatalogUnit record) {
-        auto* new_records = new CatalogUnit[size + 1];
-        for (int i = 0; i < size; i++) {
-            new_records[i] = records[i];
+        if(records!= nullptr) {
+            auto *new_records = new CatalogUnit[size + 1];
+            for (int i = 0; i < size; i++) {
+                new_records[i] = records[i];
+            }
+            new_records[size] = record;
+            delete[] records;
+            records = new_records;
+        }else{
+            records = new CatalogUnit[1];
+            records[0] = record;
         }
-        new_records[size] = record;
-        delete[] records;
-        records = new_records;
         size++;
     }
 

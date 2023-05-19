@@ -118,9 +118,14 @@ public:
         cout<<endl;
     }
 
-    static BND create(const string &name, unsigned short catamount, unsigned short dataamount){
-        return {name, dataamount, catamount};
+    void create(const string &name, unsigned short catamount, unsigned short dataamount){
+        Name = name;
+        Catamount = catamount;
+        CatOffset = dataamount;
+        DataArea = new int[dataamount]{0};
     }
+
+
     //для добавление нужна проверка на наличие свободного места в датаареа, возможность отформатировать пространство для добавления раздела
     void add(const string &catname, unsigned int length){
         if (DataArea == nullptr){
