@@ -62,6 +62,10 @@ public:
     CatalogUnit *getRecords() const {
         return records;
     }
+
+    unsigned short getSize() const {
+        return size;
+    }
 };
 
 

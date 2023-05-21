@@ -128,6 +128,9 @@ public:
 
     //для добавление нужна проверка на наличие свободного места в датаареа, возможность отформатировать пространство для добавления раздела
     void add(const string &catname, unsigned int length){
+        if(catalog.getSize() == Catamount){
+            throw Error("Space for catalogs is full!");
+        }
         if (DataArea == nullptr){
             throw Error("No space was specified");
         }
@@ -135,6 +138,7 @@ public:
             throw Error("Name is too long");
         }
         char *name = new char[catname.length()];
+        //char name[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
         for(int i=0; i<catname.length(); i++){
             *(name+i) = catname[i];
         }
@@ -238,12 +242,13 @@ public:
             throw Error("Name is too long");
         }
         char *namesec = new char[SecName.length()];
+        //char namesec[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
         for(int i=0; i<SecName.length(); i++){
             *(namesec+i) = SecName[i];
         }
         unsigned int start =  catalog.searchRecordByName(namesec)->getOffset();
         unsigned int len =  catalog.searchRecordByName(namesec)->getLength();
-        for(unsigned int i=start; i<start+len-1; i++){
+        for(unsigned int i=start; i<start+len; i++){
             *(DataArea+i) = 0;
         }
         catalog.searchRecordByName(namesec)->DeleteThisUnit();

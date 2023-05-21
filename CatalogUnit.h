@@ -11,27 +11,38 @@ using namespace std;
 
 class CatalogUnit {
 private:
-    char name[10]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0'};
+    char name[11]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 0};
 //    bool isMain;
     unsigned int offset;
     unsigned int length;
+
+    static int getsize(const char * n){
+        int size = 0;
+        while(*n++) ++size;
+        return size;
+    }
 public:
     CatalogUnit() {
-        strcpy(name, "");
+        //strcpy(name, "");
 //        isMain = false;
         offset = 0;
         length = 0;
     }
 
     CatalogUnit(const char* n, unsigned int o, unsigned int l) {
-        strcpy(name, n);
+        for(int i=0; i< getsize(n); i++){
+            name[i] = *(n+i);
+        }
 //        isMain = m;
         offset = o;
         length = l;
     }
 
     void setName(const char* n) {
-        strcpy(name, n);
+        for(int i=0; i< getsize(n); i++){
+            name[i] = *(n+i);
+        }
+        //strcpy(name, n);
     }
 
 //    void setMain(bool m) {
@@ -71,10 +82,11 @@ public:
     }
 
     void print() {
-        for(int i=0; i<10; i++){
-            cout<<name[i];
+        string dopname;
+        for(char i : name){
+            dopname.push_back(i);
         }
-        cout << " " << offset << " " << length;
+        cout <<dopname<< " " << offset << " " << length;
     }
 };
 

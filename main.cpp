@@ -29,6 +29,7 @@ int main() {
                 break;
             }
             case 1: {
+                ::getchar();
                 cout << "Enter BND's name:";
                 string name;
                 cin >> name;
@@ -46,6 +47,7 @@ int main() {
                 break;
             }
             case 2: {
+                ::getchar();
                 cout << "Choose parameters:" << endl;
                 cout << "1 - CatOffset" << endl;
                 cout << "2 - CatAmount" << endl;
@@ -55,6 +57,7 @@ int main() {
 
                 switch (propChoice) {
                     case 1: {
+                        ::getchar();
                         cout << "Enter CatOffset:";
                         short offset;
                         cin >> offset;
@@ -63,6 +66,7 @@ int main() {
 
                     }
                     case 2: {
+                        ::getchar();
                         cout << "Enter CatAmount:";
                         short amount;
                         cin >> amount;
@@ -70,6 +74,7 @@ int main() {
                         break;
                     }
                     case 3: {
+                        ::getchar();
                         cout << "Enter name:";
                         string newName;
                         cin >> newName;
@@ -90,7 +95,8 @@ int main() {
                 ::getchar();
                 cout << "Enter name: ";
                 string catname;
-                getline(cin, catname);
+                //getline(cin, catname);
+                cin>>catname;
                 cout << "Enter length: ";
                 int length;
                 cin >> length;
@@ -100,11 +106,13 @@ int main() {
                 }
                 catch(Error er){
                     cerr<<er.str;
+                    break;
                 }
                 cout << "Element has been added." << endl;
                 break;
             }
             case 5: {
+                ::getchar();
                 cout << "Enter old name: ";
                 string oldname, newname;
                 getline(cin, oldname);
@@ -115,6 +123,7 @@ int main() {
                 }
                 catch (Error er){
                     cerr<<er.str;
+                    break;
                 }
                 cout << "Catalog has been renamed." << endl;
                 break;
@@ -130,6 +139,7 @@ int main() {
                 }
                 catch (Error er){
                     cerr<<er.str;
+                    break;
                 }
                 cout << "BND has been reorganized." << endl;
 
@@ -154,6 +164,7 @@ int main() {
                 }
                 catch (Error er){
                     cerr<<er.str;
+                    break;
                 }
             }
             default:{
