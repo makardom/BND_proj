@@ -40,6 +40,7 @@ private:
         if(num<need){
             return -1;
         }
+
         for (int i = 0; i<CatOffset; i++){
             if(*(DataArea+i)==0)
                 if(lengthSpace(i)>=need) {
@@ -47,12 +48,7 @@ private:
                 }
         }
 
-        int start = 0;
-        reorganization();
-        while(*(DataArea+start)!=0){
-            start ++;
-        }
-        return start;
+        return -1;
     }
 
     int checkSection(unsigned int a, const unsigned int offsets[]) const{
@@ -144,7 +140,7 @@ public:
         }
         int num = findSpace(length);
         if(num == -1){
-            throw Error("There is not enough space");
+            throw Error("Can't add data in DataArea!");
         }else{
             for(int i = num; i<num+length; i++){
                 *(DataArea+i)=BLOCK;
