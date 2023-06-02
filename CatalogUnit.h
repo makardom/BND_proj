@@ -31,7 +31,7 @@ public:
 
     CatalogUnit(const char* n, unsigned int o, unsigned int l) {
         for(int i=0; i< getsize(n); i++){
-            name[i] = *(n+i);
+            name[i] = n[i];
         }
 //        strcpy(name, n);
 //        isMain = m;
