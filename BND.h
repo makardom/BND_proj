@@ -117,7 +117,7 @@ public:
     }
 
     void print(){
-        cout<<Name<<"LB"<<CatOffset<<Catamount;
+        cout<<Name<<"LB"<<CatOffset<<Catamount<<" ";
         for(int i=0; i<CatOffset; i++)
             cout<<*(DataArea+i);
         catalog.print();

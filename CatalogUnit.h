@@ -84,7 +84,7 @@ public:
         for(char i : name){
             dopname.push_back(i);
         }
-        cout <<dopname<< " " << offset << " " << length;
+        cout <<dopname<< " " << offset << " " << length<< " ";
     }
 };
 
