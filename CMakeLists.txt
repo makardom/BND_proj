@@ -3,4 +3,4 @@ project(BND_proj)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(BND_proj main.cpp Catalog.h CatalogUnit.h BND.h)
+add_executable(BND_proj Catalog.h CatalogUnit.h BND.h main.cpp)

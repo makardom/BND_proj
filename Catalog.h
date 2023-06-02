@@ -16,16 +16,15 @@ const int BLOCK = 1;
 
 class Catalog {
 private:
-    CatalogUnit* records;
+    vector<CatalogUnit> records;
     unsigned short size;
 public:
     Catalog() {
-        records = nullptr;
         size = 0;
     }
 
     ~Catalog() {
-        delete[] records;
+        records.clear();
     }
 
     void print() {
@@ -35,18 +34,7 @@ public:
     }
 
     void addRecord(CatalogUnit record) {
-        if(records!= nullptr) {
-            auto *new_records = new CatalogUnit[size + 1];
-            for (int i = 0; i < size; i++) {
-                new_records[i] = records[i];
-            }
-            new_records[size] = record;
-            delete[] records;
-            records = new_records;
-        }else{
-            records = new CatalogUnit[1];
-            records[0] = record;
-        }
+        records.push_back(record);
         size++;
     }
 
@@ -59,12 +47,32 @@ public:
         return nullptr;
     }
 
-    CatalogUnit *getRecords() const {
+    void makeNewMassive(){
+        if(size==0){
+            records.clear();
+        }else {
+            int i=0;
+            for(const auto & record : records){
+                if(record.getNameSize()==0){
+                    break;
+                }
+                i++;
+            }
+            records.erase(records.cbegin()+i);
+        }
+        copy(records.begin(), records.end(), records.begin());
+    }
+
+    vector<CatalogUnit> &getRecords() {
         return records;
     }
 
     unsigned short getSize() const {
         return size;
+    }
+
+    void decSize(){
+        size--;
     }
 };
 

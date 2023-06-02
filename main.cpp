@@ -1,7 +1,9 @@
 #include <iostream>
+#include <windows.h>
 #include "BND.h"
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     BND bnd;
     bool exit = false;
     while (!exit) {
@@ -19,7 +21,7 @@ int main() {
         cout << "11 -DeleteSection" << endl;
         cout << "0 - Exit" << endl;
 
-        int choice;
+        int choice = 0;
         cin >> choice;
 
         switch (choice) {
@@ -86,6 +88,7 @@ int main() {
                         break;
                     }
                 }
+                break;
             }
             case 3: {
                 bnd.print();
@@ -142,17 +145,20 @@ int main() {
                     break;
                 }
                 cout << "BND has been reorganized." << endl;
-
+                break;
             }
             case 8:{
                 bnd.OutFreeSpace();
                 cout<<"BND out free space."<<endl;
+                break;
             }
             case 9:{
                 bnd.printCatalog();
+                break;
             }
             case 10:{
                 bnd.OutSectionAlphabet();
+                break;
             }
             case 11:{
                 ::getchar();
@@ -166,6 +172,7 @@ int main() {
                     cerr<<er.str;
                     break;
                 }
+                break;
             }
             default:{
                 cout << "Wrong choice" << endl;

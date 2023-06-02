@@ -11,7 +11,7 @@ using namespace std;
 
 class CatalogUnit {
 private:
-    char name[10]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0'};
+    char name[10]{'0'};
 //    bool isMain;
     unsigned int offset;
     unsigned int length;
@@ -30,27 +30,23 @@ public:
     }
 
     CatalogUnit(const char* n, unsigned int o, unsigned int l) {
-//        for(int i=0; i< getsize(n); i++){
-//            name[i] = *(n+i);
-//        }
-        strcpy(name, n);
+        for(int i=0; i< getsize(n); i++){
+            name[i] = *(n+i);
+        }
+//        strcpy(name, n);
 //        isMain = m;
         offset = o;
         length = l;
     }
 
     void setName(const char *n) {
-//        for(int i=0; i< getsize(n); i++){
-//            name[i] = *(n+i);
-//        }
-        strcpy(name, n);
+        for(int i=0; i< getsize(n); i++){
+            name[i] = *(n+i);
+        }
+        //strcpy(name, n);
     }
 
-//    void setMain(bool m) {
-//        isMain = m;
-//    }
-
-    void setOffset(int o) {
+    void setOffset(unsigned int o) {
         offset = o;
     }
 
@@ -62,9 +58,10 @@ public:
         return name;
     }
 
-//    bool isMainCatalog() const {
-//        return isMain;
-//    }
+    int getNameSize() const {
+        return getsize(name);
+    }
+
 
     unsigned int getOffset() const {
         return offset;

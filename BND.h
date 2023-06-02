@@ -3,6 +3,7 @@
 //
 #include <utility>
 #include <vector>
+#include <algorithm>
 
 #include "Catalog.h"
 
@@ -51,8 +52,8 @@ private:
         return -1;
     }
 
-    int checkSection(unsigned int a, const unsigned int offsets[]) const{
-        for(int i=0; i<Catamount; i++){
+    int checkSection(unsigned int a, const unsigned int *offsets) const{
+        for(int i=0; i<catalog.getSize(); i++){
             if (a==offsets[i])
                 return i;
         }
@@ -60,9 +61,18 @@ private:
     }
 
     void switchData(int a, int b){
-        int tmp = *(DataArea+a);
-        *(DataArea+a) = *(DataArea+b);
-        *(DataArea+b) = tmp;
+        auto tmp = DataArea[a];
+        DataArea[a] = DataArea[b];
+        DataArea[b] = tmp;
+    }
+
+    static int checkPosition(const unsigned int *offsets, int n, unsigned int need){
+        for(int i=0; i<n; i++){
+            if (offsets[i]==need){
+                return i;
+            }
+        }
+        return -1;
     }
 public:
     BND(string name, unsigned short catOffset, unsigned short catamount) : Name(std::move(name)), CatOffset(catOffset), Catamount(catamount) {
@@ -133,10 +143,11 @@ public:
         if (catname.length()>10){
             throw Error("Name is too long");
         }
-        char *name = new char[catname.length()];
+        char *name = new char[catname.length()+1];
         //char name[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
         for(int i=0; i<catname.length(); i++){
             *(name+i) = catname[i];
+            *(name+i+1) = '\0';
         }
         int num = findSpace(length);
         if(num == -1){
@@ -149,28 +160,36 @@ public:
             catalog.addRecord(newCatU);
         }
     }
-    //очень тщательно проверять
+
+
+
     void reorganization(){
-        unsigned int offsets[Catamount];
+        unsigned int offsets[catalog.getSize()];
         unsigned int lengths = 0;
-        for (int i=0; i<Catamount; i++){
-            offsets[i] = (catalog.getRecords()+i)->getOffset();
-            lengths += (catalog.getRecords()+i)->getLength();
+//        auto *records = new CatalogUnit[Catamount];
+        for (int i=0; i<catalog.getSize(); i++){
+            offsets[i] = catalog.getRecords()[i].getOffset();
+            lengths += catalog.getRecords()[i].getLength();
         }
         if(lengths==CatOffset)
             throw Error("Impossible to reorganize DataArea");
         for(int i=0; i<CatOffset-lengths; i++) //обходим столько раз, сколько свободных ячеек в DataArea
         {
-            unsigned int nol = 0;
+            int nol = 0;
             while(*(DataArea+nol)!=0){
                 nol++;
             }
             while (nol!=CatOffset-2){
                 if(*(DataArea+nol+1)==1)
                 {
-                    (catalog.getRecords()+checkSection(nol+1, offsets))->setOffset(nol);
+                    int sec = checkSection(nol+1, offsets);
+                    if(sec!=-1) {
+                        catalog.getRecords()[sec].setOffset(nol);
+                        offsets[checkPosition(offsets, catalog.getSize(), nol + 1)] = nol;
+                    }
                 }
-                switchData(nol, nol+1);
+                nol++;
+                switchData(nol-1, nol);
             }
         }
 
@@ -182,7 +201,11 @@ public:
         CatOffset = 0;
         delete[] DataArea;
         DataArea = nullptr;
-        catalog.Catalog::~Catalog();
+        int k = catalog.getSize();
+        for(int i=0; i<k; i++){
+            catalog.decSize();
+        }
+        catalog.getRecords().clear();
     }
 
     void renameCatalog(string oldname, string newname){
@@ -195,14 +218,14 @@ public:
         char *oldname1 = new char[oldname.length()];
         for(int i=0; i<oldname.length(); i++){
             *(oldname1+i) = oldname[i];
+            *(oldname1+i+1) = '\0';
         }
         char *newname1 = new char[newname.length()];
         for(int i=0; i<newname.length(); i++){
             *(newname1+i) = newname[i];
+            *(newname1+i+1) = '\0';
         }
         catalog.searchRecordByName(oldname1)->setName(newname1);
-        delete[] oldname1;
-        delete[] newname1;
     }
 
     void OutFreeSpace(){
@@ -223,7 +246,7 @@ public:
         string names[Catamount];
         for (int i=0; i<Catamount; i++){
             for (int j=0; j<10; j++)
-                names[i].push_back((catalog.getRecords()+i)->getName()[j]);
+                names[i].push_back(catalog.getRecords()[i].getName()[j]);
         }
         vector<string> namevec;
         for(auto &i : names)
@@ -241,6 +264,7 @@ public:
         //char namesec[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
         for(int i=0; i<SecName.length(); i++){
             *(namesec+i) = SecName[i];
+            *(namesec+i+1) = '\0';
         }
         unsigned int start =  catalog.searchRecordByName(namesec)->getOffset();
         unsigned int len =  catalog.searchRecordByName(namesec)->getLength();
@@ -248,7 +272,7 @@ public:
             *(DataArea+i) = 0;
         }
         catalog.searchRecordByName(namesec)->DeleteThisUnit();
-        Catamount--;
+        catalog.decSize(); catalog.makeNewMassive();
     }
 
 };
