@@ -245,8 +245,7 @@ public:
     void OutSectionAlphabet(){
         string names[catalog.getSize()];
         for (int i=0; i<catalog.getSize(); i++){
-            for (int j=0; j<10; j++)
-                names[i].push_back(catalog.getRecords()[i].getName()[j]);
+            names[i] = catalog.getRecords()[i].getName();
         }
         vector<string> namevec;
         for(auto &i : names)
