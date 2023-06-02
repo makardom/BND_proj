@@ -179,7 +179,7 @@ public:
             while(*(DataArea+nol)!=0){
                 nol++;
             }
-            while (nol!=CatOffset-2){
+            while (nol<=CatOffset-2){
                 if(*(DataArea+nol+1)==1)
                 {
                     int sec = checkSection(nol+1, offsets);
