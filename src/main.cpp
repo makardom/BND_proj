@@ -41,7 +41,7 @@ int main() {
                 cout << "Enter the amount of data:";
                 int dataamount;
                 cin >> dataamount;
-                bnd.create(name, catamount, dataamount);
+                bnd.create(catamount, dataamount);
 //                bnd.setName(name);
 //                bnd.setCatamount(catamount);
 //                bnd.setCatOffset(dataamount);
@@ -53,7 +53,6 @@ int main() {
                 cout << "Choose parameters:" << endl;
                 cout << "1 - CatOffset" << endl;
                 cout << "2 - CatAmount" << endl;
-                cout << "3 - setName" << endl;
                 int propChoice;
                 cin >> propChoice;
 
@@ -73,14 +72,6 @@ int main() {
                         short amount;
                         cin >> amount;
                         bnd.setCatamount(amount);
-                        break;
-                    }
-                    case 3: {
-                        ::getchar();
-                        cout << "Enter name:";
-                        string newName;
-                        cin >> newName;
-                        bnd.setName(newName);
                         break;
                     }
                     default: {

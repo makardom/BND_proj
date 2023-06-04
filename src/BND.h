@@ -17,7 +17,6 @@ struct Error{
 
 class BND {
 private:
-    string Name;
     const string LB = "LB";
     unsigned short CatOffset = 0; // кол-во блоков, которое выделено для БНД (смещение до начала разделов БНД)
     unsigned short Catamount = 0; // кол-во разделов в БНД
@@ -75,9 +74,7 @@ private:
         return -1;
     }
 public:
-    BND(string name, unsigned short catOffset, unsigned short catamount) : Name(std::move(name)), CatOffset(catOffset), Catamount(catamount) {
-        DataArea = new int[catOffset]{0};
-    }
+
     BND(unsigned short catOffset, unsigned short catamount) : CatOffset(catOffset), Catamount(catamount) {
         DataArea = new int[catOffset]{0};
     }
@@ -112,20 +109,16 @@ public:
         Catamount = catamount;
     }
 
-    void setName(const string &name) {
-        Name = name;
-    }
 
     void print(){
-        cout<<Name<<"LB"<<CatOffset<<Catamount<<" ";
+        cout<<"LB"<<CatOffset<<Catamount<<" ";
         for(int i=0; i<CatOffset; i++)
             cout<<*(DataArea+i);
         catalog.print();
         cout<<endl;
     }
 
-    void create(const string &name, unsigned short catamount, unsigned short dataamount){
-        Name = name;
+    void create(unsigned short catamount, unsigned short dataamount){
         Catamount = catamount;
         CatOffset = dataamount;
         DataArea = new int[dataamount]{0};
@@ -196,7 +189,6 @@ public:
     }
 
     void Delete(){
-        Name.clear();
         Catamount = 0;
         CatOffset = 0;
         delete[] DataArea;
