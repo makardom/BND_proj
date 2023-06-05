@@ -6,11 +6,14 @@
 #define BND_PROJ_BINSERIALIZER_HPP
 
 #include <fstream>
-#include <rpcndr.h>
 #include "ISerializer.hpp"
 class BinSerializer : public ISerializer{
 private:
     std::fstream file;
+    static constexpr off_t BND_INFO_START_BLOCK = 0;
+    static constexpr size_t BND_INFO_BLOCK_SIZE = 10;
+    static constexpr size_t BND_DATA_BLOCK_SIZE = 4;
+    static constexpr size_t BND_CATALOG_RECORD_SIZE = 18;
 public:
     BinSerializer() : file() {}
 
@@ -33,8 +36,15 @@ public:
     void create(const std::string &filename) override;
     void close() override;
 
-    bool is_open() override;
+    void save(BND &bnd) override;
+    void save(CatalogUnit &catalogUnit, off_t offset) override;
+    void save(const Catalog &catalog, off_t offset) override;
 
+    void load(BND &bnd) override;
+    void load(CatalogUnit &catalogUnit, off_t offset) override;
+    void load(Catalog &catalog, off_t offset, unsigned int amount) override;
+
+    bool is_open() override;
 };
 
 #endif //BND_PROJ_BINSERIALIZER_HPP

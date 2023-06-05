@@ -17,7 +17,7 @@ struct Error{
 
 class BND {
 private:
-    const string LB = "LB";
+    const char LB[2] = {'L', 'B'};
     unsigned short CatOffset = 0; // кол-во блоков, которое выделено для БНД (смещение до начала разделов БНД)
     unsigned short Catamount = 0; // кол-во разделов в БНД
     int *DataArea = nullptr;
@@ -74,14 +74,19 @@ private:
         return -1;
     }
 public:
-
     BND(unsigned short catOffset, unsigned short catamount) : CatOffset(catOffset), Catamount(catamount) {
         DataArea = new int[catOffset]{0};
     }
 
     BND() = default;
+    void setDataArea(int *dataArea) {
+        DataArea = dataArea;
+    }
 
-    string getLb() const {
+    void setCatalog(const Catalog &catalog) {
+        BND::catalog = catalog;
+    }
+    const char *getLb() const {
         return LB;
     }
 
@@ -100,7 +105,9 @@ public:
     const Catalog &getCatalog() const {
         return catalog;
     }
-
+    Catalog &getCatalog(){
+        return catalog;
+    }
     void setCatOffset(unsigned short catOffset) {
         CatOffset = catOffset;
     }

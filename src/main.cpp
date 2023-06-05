@@ -1,7 +1,23 @@
 #include <iostream>
 #include <windows.h>
-#include "BND.h"
+#include "serializer/BinSerializer.hpp"
+size_t getFileLength(const std::string& name){
+    // Открываем файл для чтения в бинарном режиме
+    ifstream file(name, ios::binary);
 
+    // Определяем начальную позицию чтения
+    streampos begin = file.tellg();
+
+    // Перемещаем указатель чтения на конец файла
+    file.seekg(0, ios::end);
+
+    // Определяем конечную позицию чтения
+    streampos end = file.tellg();
+
+    // Определяем размер файла
+    size_t size = end - begin;
+    return size;
+}
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     BND bnd;
@@ -32,9 +48,6 @@ int main() {
             }
             case 1: {
                 ::getchar();
-                cout << "Enter BND's name:";
-                string name;
-                cin >> name;
                 cout << "Enter the amount of catalog:";
                 int catamount;
                 cin >> catamount;
@@ -124,7 +137,6 @@ int main() {
             }
             case 6: {
                 bnd.Delete();
-                cout << "Deleted." << endl;
                 break;
             }
             case 7: {
@@ -163,6 +175,74 @@ int main() {
                     cerr<<er.str;
                     break;
                 }
+                break;
+            }
+            case 12: {
+                BinSerializer binSerializer("BND.bin");
+                binSerializer.create("BND.bin");
+                binSerializer.save(bnd);
+                binSerializer.close();
+                char name[2] = {'0', '0'};
+                int catAmount = 0;
+                int catOffset = 0;
+                std::ifstream file("BND.bin", std::ios::binary);
+                // Проверка, открылся ли файл
+                if (!file.is_open()) {
+                    std::cout << "Could not open file" << std::endl;
+                    return 1;
+                }
+                file.read(name, sizeof(char[2]));
+                file.read(reinterpret_cast<char *>(&catAmount), sizeof(int));
+                file.read(reinterpret_cast<char *>(&catOffset), sizeof(int));
+                std::cout << "name = " << name[0]<<name[1]<< std::endl;
+                std::cout << "catAmount = " << catAmount << std::endl;
+                std::cout << "catOffset = " << catOffset << std::endl;
+
+                int *array = new int[catOffset];
+                for(int i = 0; i < catOffset; i++ ){
+                    file.read(reinterpret_cast<char *>(&array[i]), sizeof(int));
+                }
+                for (int i = 0; i < catOffset; i++){
+                    std::cout << i << " = " << array[i] << std::endl;
+                }
+                std::cout<<"file size = "<<getFileLength("BND.bin");
+                file.close();
+                break;
+            }
+            case 13:{
+                const char* filename = "BND.bin";
+                if (remove(filename) != 0) {
+                    perror("Ошибка удаления файла");
+                } else {
+                    printf("Файл %s удален\n", filename);
+                }
+                break;
+            }
+            case 14:{
+                BinSerializer binSerializer("BND.bin");
+                binSerializer.create("BND.bin");
+                const Catalog& catalog = bnd.getCatalog();
+                binSerializer.save(catalog, (off_t) 0);
+                binSerializer.close();
+
+                std::ifstream file("BND.bin", std::ios::binary);
+                if (!file.is_open()) {
+                    std::cout << "Could not open file" << std::endl;
+                    return 1;
+                }
+                char name[10] = {0};
+                unsigned int offset = 0;
+                unsigned int amount = 0;
+                CatalogUnit catalogUnit(name, offset, amount);
+                CatalogUnit catalogUnit2(name, offset, amount);
+                file.read(reinterpret_cast<char *>(&catalogUnit), sizeof(CatalogUnit));
+                std::cout<<"file size = "<<getFileLength("BND.bin");
+                file.read(reinterpret_cast<char *>(&catalogUnit2), sizeof(CatalogUnit));
+
+                catalogUnit.print();
+                catalogUnit2.print();
+                std::cout<<"file size = "<<getFileLength("BND.bin");
+                file.close();
                 break;
             }
             default:{
