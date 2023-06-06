@@ -182,31 +182,7 @@ int main() {
                 binSerializer.create("BND.bin");
                 binSerializer.save(bnd);
                 binSerializer.close();
-                char name[2] = {'0', '0'};
-                int catAmount = 0;
-                int catOffset = 0;
-                std::ifstream file("BND.bin", std::ios::binary);
-                // Проверка, открылся ли файл
-                if (!file.is_open()) {
-                    std::cout << "Could not open file" << std::endl;
-                    return 1;
-                }
-                file.read(name, sizeof(char[2]));
-                file.read(reinterpret_cast<char *>(&catAmount), sizeof(int));
-                file.read(reinterpret_cast<char *>(&catOffset), sizeof(int));
-                std::cout << "name = " << name[0]<<name[1]<< std::endl;
-                std::cout << "catAmount = " << catAmount << std::endl;
-                std::cout << "catOffset = " << catOffset << std::endl;
-
-                int *array = new int[catOffset];
-                for(int i = 0; i < catOffset; i++ ){
-                    file.read(reinterpret_cast<char *>(&array[i]), sizeof(int));
-                }
-                for (int i = 0; i < catOffset; i++){
-                    std::cout << i << " = " << array[i] << std::endl;
-                }
-                std::cout<<"file size = "<<getFileLength("BND.bin");
-                file.close();
+                std::cout<<"file size = "<<getFileLength("BND.bin")<<endl;
                 break;
             }
             case 13:{
@@ -221,28 +197,26 @@ int main() {
             case 14:{
                 BinSerializer binSerializer("BND.bin");
                 binSerializer.create("BND.bin");
-                const Catalog& catalog = bnd.getCatalog();
-                binSerializer.save(catalog, (off_t) 0);
+                binSerializer.load(bnd);
                 binSerializer.close();
 
-                std::ifstream file("BND.bin", std::ios::binary);
-                if (!file.is_open()) {
-                    std::cout << "Could not open file" << std::endl;
-                    return 1;
+                break;
+            }
+            case 15:{
+                BinSerializer binSerializer("BND.bin");
+//                binSerializer.create("BND.bin");
+//                const Catalog& catalog = bnd.getCatalog();
+//                binSerializer.save(catalog, (off_t) 0);
+//                binSerializer.close();
+//                binSerializer.open("BND.bin");
+                Catalog catalog1;
+                binSerializer.load(catalog1,22,2);
+                for(CatalogUnit catalogUnit: catalog1.getRecords()){
+                    catalogUnit.print();
+                    std::cout<<endl;
                 }
-                char name[10] = {0};
-                unsigned int offset = 0;
-                unsigned int amount = 0;
-                CatalogUnit catalogUnit(name, offset, amount);
-                CatalogUnit catalogUnit2(name, offset, amount);
-                file.read(reinterpret_cast<char *>(&catalogUnit), sizeof(CatalogUnit));
                 std::cout<<"file size = "<<getFileLength("BND.bin");
-                file.read(reinterpret_cast<char *>(&catalogUnit2), sizeof(CatalogUnit));
-
-                catalogUnit.print();
-                catalogUnit2.print();
-                std::cout<<"file size = "<<getFileLength("BND.bin");
-                file.close();
+                binSerializer.close();
                 break;
             }
             default:{

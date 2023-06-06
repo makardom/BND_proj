@@ -21,7 +21,7 @@ public:
 
     virtual void load(BND &bnd) = 0;
     virtual void load(CatalogUnit &catalogUnit, off_t offset) = 0;
-    virtual void load(Catalog &catalog, off_t offset, unsigned int amount) = 0;
+    virtual void load(Catalog &catalog, off_t offset, unsigned short amount) = 0;
 
     virtual ~ISerializer() = default;
 };
