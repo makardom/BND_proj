@@ -175,14 +175,14 @@ public:
             throw Error("Impossible to reorganize DataArea");
         for(int i=0; i<CatOffset-lengths; i++) //обходим столько раз, сколько свободных ячеек в DataArea
         {
-            int nol = 0;
+            int nol = 0; // в эту переменную заносится смещение до первого встреченного нуля
             while(*(DataArea+nol)!=0){
                 nol++;
             }
             while (nol<=CatOffset-2){
                 if(*(DataArea+nol+1)==1)
                 {
-                    int sec = checkSection(nol+1, offsets);
+                    int sec = checkSection(nol+1, offsets); // в эту переменную вносится индекс каталога в массиве offsets
                     if(sec!=-1) {
                         catalog.getRecords()[sec].setOffset(nol);
                         offsets[checkPosition(offsets, catalog.getSize(), nol + 1)] = nol;
@@ -195,7 +195,7 @@ public:
 
     }
 
-    void Delete(){
+    void Delete(){ // полное очищение данного БНД
         Name.clear();
         Catamount = 0;
         CatOffset = 0;
