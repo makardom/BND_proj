@@ -13,12 +13,12 @@ size_t getFileLength(const std::string& name){
 
     // Определяем конечную позицию чтения
     streampos end = file.tellg();
-
     // Определяем размер файла
     size_t size = end - begin;
     return size;
 }
 int main() {
+
     SetConsoleOutputCP(CP_UTF8);
     BND bnd;
     bool exit = false;
@@ -52,10 +52,10 @@ int main() {
             case 1: {
                 ::getchar();
                 cout << "Enter the amount of catalog:";
-                int catamount;
+                unsigned short catamount;
                 cin >> catamount;
                 cout << "Enter the amount of data:";
-                int dataamount;
+                unsigned short dataamount;
                 cin >> dataamount;
                 bnd.create(catamount, dataamount);
 //                bnd.setName(name);
@@ -76,7 +76,7 @@ int main() {
                     case 1: {
                         ::getchar();
                         cout << "Enter CatOffset:";
-                        short offset;
+                        unsigned short offset;
                         cin >> offset;
                         bnd.setCatOffset(offset);
                         break;
@@ -85,7 +85,7 @@ int main() {
                     case 2: {
                         ::getchar();
                         cout << "Enter CatAmount:";
-                        short amount;
+                        unsigned short amount;
                         cin >> amount;
                         bnd.setCatamount(amount);
                         break;
@@ -108,7 +108,7 @@ int main() {
                 //getline(cin, catname);
                 cin>>catname;
                 cout << "Enter length: ";
-                int length;
+                unsigned int length;
                 cin >> length;
                 cin.ignore();
                 try {

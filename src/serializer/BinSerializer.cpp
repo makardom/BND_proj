@@ -31,8 +31,7 @@ void BinSerializer::create(const std::string &filename) {
     }
 }
 void BinSerializer::save(BND &bnd){
-    file.clear();
-    file.seekp(0);
+    file.seekp(0, std::ios::beg);
     file.write(reinterpret_cast<const char *>(bnd.getLb()), sizeof(char[2]));
     unsigned short catAmount = bnd.getCatamount();
     file.write(reinterpret_cast<const char *>(&catAmount), sizeof(unsigned short));
@@ -45,7 +44,6 @@ void BinSerializer::save(BND &bnd){
         file.write(reinterpret_cast<const char *>(&block), sizeof(int));
     }
     save(bnd.getCatalog(),  static_cast<off_t>(file.tellg()));
-    file.flush();
 }
 void BinSerializer::save(CatalogUnit &catalogUnit, off_t offset){
     file.seekp(offset, std::ios_base::beg);
