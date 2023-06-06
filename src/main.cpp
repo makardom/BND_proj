@@ -1,8 +1,24 @@
 #include <iostream>
 #include <windows.h>
-#include "BND.h"
+#include "serializer/BinSerializer.hpp"
+size_t getFileLength(const std::string& name){
+    // Открываем файл для чтения в бинарном режиме
+    ifstream file(name, ios::binary);
 
+    // Определяем начальную позицию чтения
+    streampos begin = file.tellg();
+
+    // Перемещаем указатель чтения на конец файла
+    file.seekg(0, ios::end);
+
+    // Определяем конечную позицию чтения
+    streampos end = file.tellg();
+    // Определяем размер файла
+    size_t size = end - begin;
+    return size;
+}
 int main() {
+
     SetConsoleOutputCP(CP_UTF8);
     BND bnd;
     bool exit = false;
@@ -19,6 +35,9 @@ int main() {
         cout << "9 - printCatalog" << endl;
         cout << "10 - OutSectionAlphabet" << endl;
         cout << "11 -DeleteSection" << endl;
+        cout << "12 -Save to file" << endl;
+        cout << "13 -Delete file" << endl;
+        cout << "14 -Get from file" << endl;
         cout << "0 - Exit" << endl;
 
         int choice = 0;
@@ -32,16 +51,13 @@ int main() {
             }
             case 1: {
                 ::getchar();
-                cout << "Enter BND's name:";
-                string name;
-                cin >> name;
                 cout << "Enter the amount of catalog:";
-                int catamount;
+                unsigned short catamount;
                 cin >> catamount;
                 cout << "Enter the amount of data:";
-                int dataamount;
+                unsigned short dataamount;
                 cin >> dataamount;
-                bnd.create(name, catamount, dataamount);
+                bnd.create(catamount, dataamount);
 //                bnd.setName(name);
 //                bnd.setCatamount(catamount);
 //                bnd.setCatOffset(dataamount);
@@ -53,7 +69,6 @@ int main() {
                 cout << "Choose parameters:" << endl;
                 cout << "1 - CatOffset" << endl;
                 cout << "2 - CatAmount" << endl;
-                cout << "3 - setName" << endl;
                 int propChoice;
                 cin >> propChoice;
 
@@ -61,7 +76,7 @@ int main() {
                     case 1: {
                         ::getchar();
                         cout << "Enter CatOffset:";
-                        short offset;
+                        unsigned short offset;
                         cin >> offset;
                         bnd.setCatOffset(offset);
                         break;
@@ -70,17 +85,9 @@ int main() {
                     case 2: {
                         ::getchar();
                         cout << "Enter CatAmount:";
-                        short amount;
+                        unsigned short amount;
                         cin >> amount;
                         bnd.setCatamount(amount);
-                        break;
-                    }
-                    case 3: {
-                        ::getchar();
-                        cout << "Enter name:";
-                        string newName;
-                        cin >> newName;
-                        bnd.setName(newName);
                         break;
                     }
                     default: {
@@ -101,7 +108,7 @@ int main() {
                 //getline(cin, catname);
                 cin>>catname;
                 cout << "Enter length: ";
-                int length;
+                unsigned int length;
                 cin >> length;
                 cin.ignore();
                 try {
@@ -133,7 +140,6 @@ int main() {
             }
             case 6: {
                 bnd.Delete();
-                cout << "Deleted." << endl;
                 break;
             }
             case 7: {
@@ -172,6 +178,42 @@ int main() {
                     cerr<<er.str;
                     break;
                 }
+                break;
+            }
+            case 12: {
+                BinSerializer binSerializer("BND.bin");
+                binSerializer.create("BND.bin");
+                binSerializer.save(bnd);
+                binSerializer.close();
+                std::cout<<"file size = "<<getFileLength("BND.bin")<<endl;
+                break;
+            }
+            case 13:{
+                const char* filename = "BND.bin";
+                if (remove(filename) != 0) {
+                    perror("Ошибка удаления файла");
+                } else {
+                    printf("Файл %s удален\n", filename);
+                }
+                break;
+            }
+            case 14:{
+                BinSerializer binSerializer("BND.bin");
+                binSerializer.load(bnd);
+                binSerializer.close();
+
+                break;
+            }
+            case 15:{
+                BinSerializer binSerializer("BND.bin");
+                Catalog catalog1;
+                binSerializer.load(catalog1,22,2);
+                for(CatalogUnit catalogUnit: catalog1.getRecords()){
+                    catalogUnit.print();
+                    std::cout<<endl;
+                }
+                std::cout<<"file size = "<<getFileLength("BND.bin");
+                binSerializer.close();
                 break;
             }
             default:{

@@ -66,6 +66,9 @@ public:
     vector<CatalogUnit> &getRecords() {
         return records;
     }
+    const vector<CatalogUnit> &getRecords() const{
+        return records;
+    }
 
     unsigned short getSize() const {
         return size;
@@ -73,6 +76,14 @@ public:
 
     void decSize(){
         size--;
+    }
+
+    void setRecords(const vector<CatalogUnit> &records) {
+        Catalog::records = records;
+    }
+
+    void setSize(unsigned short size) {
+        Catalog::size = size;
     }
 };
 

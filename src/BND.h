@@ -17,8 +17,7 @@ struct Error{
 
 class BND {
 private:
-    string Name;
-    const string LB = "LB";
+    const char LB[2] = {'L', 'B'};
     unsigned short CatOffset = 0; // кол-во блоков, которое выделено для БНД (смещение до начала разделов БНД)
     unsigned short Catamount = 0; // кол-во разделов в БНД
     int *DataArea = nullptr;
@@ -75,16 +74,19 @@ private:
         return -1;
     }
 public:
-    BND(string name, unsigned short catOffset, unsigned short catamount) : Name(std::move(name)), CatOffset(catOffset), Catamount(catamount) {
-        DataArea = new int[catOffset]{0};
-    }
     BND(unsigned short catOffset, unsigned short catamount) : CatOffset(catOffset), Catamount(catamount) {
         DataArea = new int[catOffset]{0};
     }
 
     BND() = default;
+    void setDataArea(int *dataArea) {
+        DataArea = dataArea;
+    }
 
-    string getLb() const {
+    void setCatalog(const Catalog &catalog) {
+        BND::catalog = catalog;
+    }
+    const char *getLb() const {
         return LB;
     }
 
@@ -103,7 +105,9 @@ public:
     const Catalog &getCatalog() const {
         return catalog;
     }
-
+    Catalog &getCatalog(){
+        return catalog;
+    }
     void setCatOffset(unsigned short catOffset) {
         CatOffset = catOffset;
     }
@@ -112,20 +116,16 @@ public:
         Catamount = catamount;
     }
 
-    void setName(const string &name) {
-        Name = name;
-    }
 
     void print(){
-        cout<<Name<<"LB"<<CatOffset<<Catamount<<" ";
+        cout<<"LB"<<CatOffset<<Catamount<<" ";
         for(int i=0; i<CatOffset; i++)
             cout<<*(DataArea+i);
         catalog.print();
         cout<<endl;
     }
 
-    void create(const string &name, unsigned short catamount, unsigned short dataamount){
-        Name = name;
+    void create(unsigned short catamount, unsigned short dataamount){
         Catamount = catamount;
         CatOffset = dataamount;
         DataArea = new int[dataamount]{0};
@@ -175,14 +175,14 @@ public:
             throw Error("Impossible to reorganize DataArea");
         for(int i=0; i<CatOffset-lengths; i++) //обходим столько раз, сколько свободных ячеек в DataArea
         {
-            int nol = 0; // в эту переменную заносится смещение до первого встреченного нуля
+            int nol = 0;
             while(*(DataArea+nol)!=0){
                 nol++;
             }
             while (nol<=CatOffset-2){
                 if(*(DataArea+nol+1)==1)
                 {
-                    int sec = checkSection(nol+1, offsets); // в эту переменную вносится индекс каталога в массиве offsets
+                    int sec = checkSection(nol+1, offsets);
                     if(sec!=-1) {
                         catalog.getRecords()[sec].setOffset(nol);
                         offsets[checkPosition(offsets, catalog.getSize(), nol + 1)] = nol;
@@ -195,8 +195,7 @@ public:
 
     }
 
-    void Delete(){ // полное очищение данного БНД
-        Name.clear();
+    void Delete(){
         Catamount = 0;
         CatOffset = 0;
         delete[] DataArea;
