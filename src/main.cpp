@@ -35,6 +35,9 @@ int main() {
         cout << "9 - printCatalog" << endl;
         cout << "10 - OutSectionAlphabet" << endl;
         cout << "11 -DeleteSection" << endl;
+        cout << "12 -Save to file" << endl;
+        cout << "13 -Delete file" << endl;
+        cout << "14 -Get from file" << endl;
         cout << "0 - Exit" << endl;
 
         int choice = 0;
@@ -196,7 +199,6 @@ int main() {
             }
             case 14:{
                 BinSerializer binSerializer("BND.bin");
-                binSerializer.create("BND.bin");
                 binSerializer.load(bnd);
                 binSerializer.close();
 
@@ -204,11 +206,6 @@ int main() {
             }
             case 15:{
                 BinSerializer binSerializer("BND.bin");
-//                binSerializer.create("BND.bin");
-//                const Catalog& catalog = bnd.getCatalog();
-//                binSerializer.save(catalog, (off_t) 0);
-//                binSerializer.close();
-//                binSerializer.open("BND.bin");
                 Catalog catalog1;
                 binSerializer.load(catalog1,22,2);
                 for(CatalogUnit catalogUnit: catalog1.getRecords()){

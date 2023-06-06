@@ -10,8 +10,7 @@
 class BinSerializer : public ISerializer{
 private:
     std::fstream file;
-    static constexpr off_t BND_INFO_START_BLOCK = 0;
-    static constexpr size_t BND_INFO_BLOCK_SIZE = 6;
+    static constexpr size_t BND_INFO_BLOCK_SIZE = 8;
     static constexpr size_t BND_DATA_BLOCK_SIZE = 4;
     static constexpr size_t BND_CATALOG_RECORD_SIZE = 18;
 public:

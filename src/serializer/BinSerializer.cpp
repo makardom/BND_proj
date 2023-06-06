@@ -38,6 +38,8 @@ void BinSerializer::save(BND &bnd){
     file.write(reinterpret_cast<const char *>(&catAmount), sizeof(unsigned short));
     unsigned short catOffset = bnd.getCatOffset();
     file.write(reinterpret_cast<const char *>(&catOffset), sizeof(unsigned short));
+    unsigned short actualAmount = bnd.getCatalog().getSize();
+    file.write(reinterpret_cast<const char *>(&actualAmount), sizeof(unsigned short));
     for(int i = 0; i < catOffset; i ++){
         int block = bnd.getDataArea()[i];
         file.write(reinterpret_cast<const char *>(&block), sizeof(int));
@@ -65,16 +67,18 @@ void BinSerializer::load(BND &bnd){
     bnd.Delete();
     unsigned short catAmount;
     unsigned short catOffset;
+    unsigned short actualAmount;
     file.seekg(sizeof(char[2]), std::ios::beg);
     file.read(reinterpret_cast<char *>(&catAmount), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&catOffset), sizeof(unsigned short));
+    file.read(reinterpret_cast<char *>(&actualAmount), sizeof(unsigned short));
     bnd.create(catAmount, catOffset);
     for(int i = 0; i < catOffset; i++){
         int block;
         file.read(reinterpret_cast<char *>(&block), sizeof(int));
         bnd.getDataArea()[i] = block;
     }
-    load(bnd.getCatalog(), (off_t)(BND_INFO_BLOCK_SIZE + (size_t)(BND_DATA_BLOCK_SIZE * catOffset)), catAmount);
+    load(bnd.getCatalog(), (off_t)(BND_INFO_BLOCK_SIZE + (size_t)(BND_DATA_BLOCK_SIZE * catOffset)), actualAmount);
 }
 void BinSerializer::load(CatalogUnit &catalogUnit, off_t offset){
     file.seekg(offset, std::ios_base::beg);
@@ -85,7 +89,7 @@ void BinSerializer::load(Catalog &catalog, off_t offset, unsigned short amount){
     catalogs.clear();
     catalog.setSize(amount);
     for(int i = 0; i < amount; i++){
-        CatalogUnit catalogUnit("d",1,2);
+        CatalogUnit catalogUnit("error",99,99);
         load(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * i));
         catalogs.push_back(catalogUnit);
     }
