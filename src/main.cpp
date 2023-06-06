@@ -18,7 +18,6 @@ size_t getFileLength(const std::string& name){
     return size;
 }
 int main() {
-
     SetConsoleOutputCP(CP_UTF8);
     BND bnd;
     bool exit = false;
