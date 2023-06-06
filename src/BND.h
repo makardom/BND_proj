@@ -119,6 +119,8 @@ public:
 
     void print(){
         cout<<"LB"<<CatOffset<<Catamount<<" ";
+        if(DataArea == nullptr)
+            throw Error("Memory is not allocated!");
         for(int i=0; i<CatOffset; i++)
             cout<<*(DataArea+i);
         catalog.print();
@@ -164,6 +166,12 @@ public:
 
 
     void reorganization(){
+        if(Catamount == 0){
+            throw Error("Memory is not allocated!");
+        }
+        if(catalog.getRecords().empty()){
+            throw Error("No catalogs!");
+        }
         unsigned int offsets[catalog.getSize()];
         unsigned int lengths = 0;
 //        auto *records = new CatalogUnit[Catamount];
@@ -208,6 +216,9 @@ public:
     }
 
     void renameCatalog(string oldname, string newname){
+        if (catalog.getSize() == 0)
+            throw Error("BND is empty!");
+
         if (newname.length()>10){
             throw Error("New Name is too long");
         }
@@ -224,10 +235,18 @@ public:
             *(newname1+i) = newname[i];
             *(newname1+i+1) = '\0';
         }
+        if(catalog.searchRecordByName(oldname1)== nullptr)
+            throw Error("Catalog with this name is absent!");
         catalog.searchRecordByName(oldname1)->setName(newname1);
     }
 
     void OutFreeSpace(){
+        if (CatOffset == 0){
+            throw Error("Memory is not allocated!");
+        }
+        if (DataArea == nullptr){
+            throw Error("Memory is not allocated!");
+        }
         int kol = 0;
         for(int i=0; i<CatOffset; i++){
             if (*(DataArea+i)==0)
@@ -242,6 +261,12 @@ public:
     }
 
     void OutSectionAlphabet(){
+        if(Catamount == 0){
+            throw Error("Memory is not allocated!");
+        }
+        if(catalog.getRecords().empty()){
+            throw Error("No catalogs!");
+        }
         string names[catalog.getSize()];
         for (int i=0; i<catalog.getSize(); i++){
             names[i] = catalog.getRecords()[i].getName();
@@ -258,18 +283,27 @@ public:
         if (SecName.length()>10){
             throw Error("Name is too long");
         }
+        if(Catamount == 0){
+            throw Error("Memory is not allocated!");
+        }
+        if(catalog.getRecords().empty()){
+            throw Error("No catalogs!");
+        }
         char *namesec = new char[SecName.length()];
         //char namesec[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
         for(int i=0; i<SecName.length(); i++){
             *(namesec+i) = SecName[i];
             *(namesec+i+1) = '\0';
         }
-        unsigned int start =  catalog.searchRecordByName(namesec)->getOffset();
-        unsigned int len =  catalog.searchRecordByName(namesec)->getLength();
+        if(catalog.searchRecordByName(namesec)== nullptr)
+            throw Error("Catalog with this name is absent!");
+        CatalogUnit *finded = catalog.searchRecordByName(namesec);
+        unsigned int start =  finded->getOffset();
+        unsigned int len =  finded->getLength();
         for(unsigned int i=start; i<start+len; i++){
             *(DataArea+i) = 0;
         }
-        catalog.searchRecordByName(namesec)->DeleteThisUnit();
+        finded->DeleteThisUnit();
         catalog.decSize(); catalog.makeNewMassive();
     }
 

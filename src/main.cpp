@@ -97,7 +97,11 @@ int main() {
                 break;
             }
             case 3: {
-                bnd.print();
+                try {
+                    bnd.print();
+                }catch (Error er){
+                    cerr<<er.str<<endl;
+                }
                 break;
             }
             case 4: {
@@ -153,7 +157,11 @@ int main() {
                 break;
             }
             case 8:{
-                bnd.OutFreeSpace();
+                try {
+                    bnd.OutFreeSpace();
+                }catch (Error er){
+                    cerr<<er.str<<endl;
+                }
                 cout<<"BND out free space."<<endl;
                 break;
             }
@@ -162,7 +170,11 @@ int main() {
                 break;
             }
             case 10:{
-                bnd.OutSectionAlphabet();
+                try{
+                    bnd.OutSectionAlphabet();
+                }catch (Error er){
+                    cerr<<er.str<<endl;
+                }
                 break;
             }
             case 11:{
