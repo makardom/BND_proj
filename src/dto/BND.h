@@ -23,12 +23,27 @@ private:
     int *DataArea = nullptr;
     Catalog catalog;
 public:
-    BND(unsigned short catOffset, unsigned short catamount) : CatOffset(catOffset), Catamount(catamount) {
+    BND(unsigned short catOffset, unsigned short catamount) : CatOffset(catOffset), Catamount(catamount), catalog() {
         DataArea = new int[catOffset]{0};
     }
 
-    BND() = default;
-
+    BND(): catalog(){}
+    BND(const BND & bnd): catalog(bnd.catalog){
+        DataArea = new int[bnd.CatOffset];
+        for(int i = 0; i < bnd.CatOffset; i++){
+            DataArea[i] = bnd.DataArea[i];
+        }
+    }
+    BND &operator=(const BND& bnd){
+        if(this == &bnd) return *this;
+        this->CatOffset = bnd.CatOffset;
+        this->Catamount = bnd.Catamount;
+        this->catalog = bnd.catalog;
+        DataArea = new int[bnd.CatOffset];
+        for(int i = 0; i < bnd.CatOffset; i++){
+            DataArea[i] = bnd.DataArea[i];
+        }
+    }
     [[nodiscard]] const char *getLb() const {
         return LB;
     }

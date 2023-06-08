@@ -16,7 +16,7 @@ public:
     BND bnd;
     bool isInit = false;
 public:
-    explicit LibraryData(ISerializer &serializer) : serializer(serializer) {}
+    explicit LibraryData(ISerializer &serializer) : serializer(serializer), bnd() {}
 
     LibraryData(LibraryData &libraryData) = delete; // can't copy serializer and info about library data
 

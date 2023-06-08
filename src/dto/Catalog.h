@@ -16,9 +16,7 @@ private:
     vector<CatalogUnit> records;
     unsigned short size;
 public:
-    Catalog() {
-        size = 0;
-    }
+    Catalog(): records(), size(0){}
 
     ~Catalog() {
         records.clear();

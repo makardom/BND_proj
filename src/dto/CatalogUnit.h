@@ -12,7 +12,6 @@ using namespace std;
 class CatalogUnit {
 private:
     char name[10]{'0'};
-//    bool isMain;
     unsigned int offset;
     unsigned int length;
 
@@ -22,35 +21,25 @@ private:
         return size;
     }
 public:
-    CatalogUnit() {
-        //strcpy(name, "");
-//        isMain = false;
-        offset = 0;
-        length = 0;
-    }
+    CatalogUnit(): offset(0), length(0){}
 
-    CatalogUnit(const char* n, unsigned int o, unsigned int l) {
+    CatalogUnit(const char* n, unsigned int o, unsigned int l): offset(o), length(l){
         for(int i=0; i< getsize(n); i++){
             name[i] = n[i];
         }
-//        strcpy(name, n);
-//        isMain = m;
-        offset = o;
-        length = l;
     }
 
     void setName(const char *n) {
         for(int i=0; i< getsize(n); i++){
             name[i] = *(n+i);
         }
-        //strcpy(name, n);
     }
 
     void setOffset(unsigned int o) {
         offset = o;
     }
 
-    void setLength(int l) {
+    void setLength(unsigned int l) {
         length = l;
     }
 

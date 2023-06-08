@@ -23,4 +23,43 @@ int main() {
     }
 
     auto commandFactory = BNDCommands(libraryData);
+#ifdef MONITOR_WITHFILE
+    std::ifstream istream("input.txt");
+    if(!istream.is_open()){
+        std::cerr << "Can't find input file: input.txt" << std::endl;
+        filesystem.close();
+        return -7;
+    }
+
+    std::ofstream ostream("output.txt");
+    if(!ostream.is_open()){
+        std::cerr << "Can't find output file: output.txt" << std::endl;
+        filesystem.close();
+        return -8;
+    }
+
+    Monitor monitor(commandFactory, istream, ostream, true);
+#else //MONITOR_WITHFILE
+    Monitor monitor(commandFactory, std::cin, std::cout, false);
+#endif //MONITOR_WITHFILE
+
+    monitor.setPrompt("BND> ");
+    monitor.setExitMessage("Goodbye.\n");
+    try {
+        monitor.run();
+    } catch (std::bad_alloc &e){
+        std::cerr << "Not enough memory." << std::endl;
+        libraryData.close();
+        return -1;
+    } catch (LibraryDataException &e) {
+        std::cerr << e.what() << std::endl;
+        libraryData.close();
+        return -2;
+    } catch (FileWriteException &e) {
+        std::cerr << "Can't save filesystem state. Check permissions or free space on a disk." << std::endl;
+        libraryData.close();
+        return -3;
+    }
+
+    libraryData.close();
 }
