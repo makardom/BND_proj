@@ -4,6 +4,7 @@
 #include "serializer/BinSerializer.hpp"
 #include "LibraryData.hpp"
 #include "exceptions/FileWriteException.hpp"
+#include "exceptions/LibraryDataException.hpp"
 
 int main() {
     BinSerializer serializer;
@@ -12,7 +13,7 @@ int main() {
 
     try {
         libraryData.open("bnd.bin");
-    } catch (FilesystemException &e) {
+    } catch (LibraryDataException &e) {
         std::cerr << e.what() << std::endl;
     } catch (std::bad_alloc &e){
         std::cerr << "Not enough memory." << std::endl;
@@ -21,5 +22,5 @@ int main() {
         std::cerr << "Can't save libraryData state. Check permissions or free space on a disk." << std::endl;
     }
 
-    auto commandFactory = FSCommands(libraryData);
+    auto commandFactory = BNDCommands(libraryData);
 }
