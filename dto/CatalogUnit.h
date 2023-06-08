@@ -58,34 +58,34 @@ public:
         return name;
     }
 
-    int getNameSize() const {
+    [[nodiscard]] int getNameSize() const {
         return getsize(name);
     }
 
 
-    unsigned int getOffset() const {
+    [[nodiscard]] unsigned int getOffset() const {
         return offset;
     }
 
-    unsigned int getLength() const {
+    [[nodiscard]] unsigned int getLength() const {
         return length;
     }
 
-    void DeleteThisUnit(){
-        for(char & i : name){
-            i = '\0';
-        }
-        offset = 0;
-        length = 0;
-    }
-
-    void print() {
-        string dopname;
-        for(char i : name){
-            dopname.push_back(i);
-        }
-        cout <<dopname<< " " << offset << " " << length<< " ";
-    }
+//    void DeleteThisUnit(){
+//        for(char & i : name){
+//            i = '\0';
+//        }
+//        offset = 0;
+//        length = 0;
+//    }
+//
+//    void print() {
+//        string dopname;
+//        for(char i : name){
+//            dopname.push_back(i);
+//        }
+//        cout <<dopname<< " " << offset << " " << length<< " ";
+//    }
 };
 
 

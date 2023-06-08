@@ -6,7 +6,7 @@
 #define BND_PROJ_ISERIALIZER_HPP
 
 #include <string>
-#include "../BND.h"
+#include "../../dto/BND.h"
 
 class ISerializer {
 public:

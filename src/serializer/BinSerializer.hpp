@@ -12,7 +12,6 @@ private:
     std::fstream file;
     static constexpr size_t BND_INFO_BLOCK_SIZE = 8;
     static constexpr size_t BND_DATA_BLOCK_SIZE = 4;
-    static constexpr size_t BND_CATALOG_RECORD_SIZE = 18;
 public:
     BinSerializer() : file() {}
 
