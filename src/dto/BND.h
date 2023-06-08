@@ -116,7 +116,7 @@ public:
 //    void reorganization(){
 //        unsigned int offsets[catalog.getSize()];
 //        unsigned int lengths = 0;
-////        auto *records = new CatalogUnit[Catamount];
+//        auto *records = new CatalogUnit[Catamount];
 //        for (int i=0; i<catalog.getSize(); i++){
 //            offsets[i] = catalog.getRecords()[i].getOffset();
 //            lengths += catalog.getRecords()[i].getLength();

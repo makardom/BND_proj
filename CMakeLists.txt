@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
-project(BND_proj)
+project(BND)
 
 set(CMAKE_CXX_STANDARD 23)
 include_directories(src)
+
 add_subdirectory(lib)
-add_executable(BND_proj src/dto/Catalog.h src/dto/CatalogUnit.h src/dto/BND.h src/main.cpp src/serializer/ISerializer.hpp src/serializer/BinSerializer.hpp src/serializer/BinSerializer.cpp src/exceptions/FileNotFoundException.hpp src/exceptions/IOException.hpp src/exceptions/FileCannotCreate.hpp src/exceptions/FileWriteException.hpp src/exceptions/CatalogSpaceFull.hpp src/exceptions/CatalogSpaceUnspecified.hpp src/exceptions/CatalogNameTooLong.hpp src/exceptions/BNDCannotAddDataInDataArea.hpp src/exceptions/BNDImpossibleToReorganize.hpp)
+add_subdirectory(src)

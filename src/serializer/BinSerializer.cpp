@@ -57,7 +57,7 @@ void BinSerializer::save(const Catalog &catalog, off_t offset){
     file.seekp(offset,std::ios_base::beg);
     int i = 0;
     for(CatalogUnit catalogUnit: catalog.getRecords()){
-        save(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * i));
+        save(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
         i++;
     }
 }
@@ -88,7 +88,7 @@ void BinSerializer::load(Catalog &catalog, off_t offset, unsigned short amount){
     catalog.setSize(amount);
     for(int i = 0; i < amount; i++){
         CatalogUnit catalogUnit("error",99,99);
-        load(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * i));
+        load(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
         catalogs.push_back(catalogUnit);
     }
     catalog.setRecords(catalogs);

@@ -6,7 +6,7 @@
 #define BND_PROJ_BINSERIALIZER_HPP
 
 #include <fstream>
-#include "ISerializer.hpp"
+#include "serializer/ISerializer.hpp"
 class BinSerializer : public ISerializer{
 private:
     std::fstream file;
