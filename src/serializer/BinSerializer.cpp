@@ -57,12 +57,12 @@ void BinSerializer::save(const Catalog &catalog, off_t offset){
     file.seekp(offset,std::ios_base::beg);
     int i = 0;
     for(CatalogUnit catalogUnit: catalog.getRecords()){
-        save(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
+        save(catalogUnit, offset + static_cast<off_t>(sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
         i++;
     }
 }
 void BinSerializer::load(BND &bnd){
-    bnd.Delete();
+    //bnd.Delete();
     unsigned short catAmount;
     unsigned short catOffset;
     unsigned short actualAmount;
@@ -70,13 +70,13 @@ void BinSerializer::load(BND &bnd){
     file.read(reinterpret_cast<char *>(&catAmount), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&catOffset), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&actualAmount), sizeof(unsigned short));
-    bnd.create(catAmount, catOffset);
+    //bnd.create(catAmount, catOffset);
     for(int i = 0; i < catOffset; i++){
         int block;
         file.read(reinterpret_cast<char *>(&block), sizeof(int));
         bnd.getDataArea()[i] = block;
     }
-    load(bnd.getCatalog(), (off_t)(BND_INFO_BLOCK_SIZE + (size_t)(BND_DATA_BLOCK_SIZE * catOffset)), actualAmount);
+    load(bnd.getCatalog(), static_cast<off_t> (BND_INFO_BLOCK_SIZE + static_cast<size_t> (BND_DATA_BLOCK_SIZE * catOffset)), actualAmount);
 }
 void BinSerializer::load(CatalogUnit &catalogUnit, off_t offset){
     file.seekg(offset, std::ios_base::beg);
@@ -88,7 +88,7 @@ void BinSerializer::load(Catalog &catalog, off_t offset, unsigned short amount){
     catalog.setSize(amount);
     for(int i = 0; i < amount; i++){
         CatalogUnit catalogUnit("error",99,99);
-        load(catalogUnit, offset + (off_t)(sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
+        load(catalogUnit, offset + static_cast<off_t> (sizeof(CatalogUnit) * static_cast<unsigned long long int>(i)));
         catalogs.push_back(catalogUnit);
     }
     catalog.setRecords(catalogs);
