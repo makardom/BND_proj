@@ -9,10 +9,9 @@
 
 class Init : public BaseCommand {
 private:
-    static std::string checkAmount(const Parser &parser);
-
+    LibraryData &libraryData;
 public:
-
+    explicit Init(LibraryData &libraryData);
     static std::string getQuery();
 
     std::string checkAndAssemble(Parser &parser) final;
