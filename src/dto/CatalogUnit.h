@@ -43,7 +43,7 @@ public:
         length = l;
     }
 
-    const char* getName() {
+    char* getName() {
         return name;
     }
 
