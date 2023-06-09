@@ -5,6 +5,7 @@
 #include "../exceptions/FileNotFoundException.hpp"
 #include "../exceptions/FileCannotCreate.hpp"
 #include "../exceptions/FileWriteException.hpp"
+#include "dtoCommands/Create.hpp"
 
 void BinSerializer::open(const std::string &filename) {
     file.open(filename);
@@ -62,7 +63,6 @@ void BinSerializer::save(const Catalog &catalog, off_t offset){
     }
 }
 void BinSerializer::load(BND &bnd){
-    //bnd.Delete();
     unsigned short catAmount;
     unsigned short catOffset;
     unsigned short actualAmount;
@@ -70,7 +70,8 @@ void BinSerializer::load(BND &bnd){
     file.read(reinterpret_cast<char *>(&catAmount), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&catOffset), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&actualAmount), sizeof(unsigned short));
-    //bnd.create(catAmount, catOffset);
+    Create bndcreate(bnd, catAmount, catOffset);
+    bndcreate.execute();
     for(int i = 0; i < catOffset; i++){
         int block;
         file.read(reinterpret_cast<char *>(&block), sizeof(int));
