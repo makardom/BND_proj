@@ -1,7 +1,7 @@
 # make library
 SET(BNDcommands_list
     Init.cpp
-        BNDCommandFactory.hpp BNDCommands.hpp Init.h)
+        )
 add_library(BNDCommands STATIC ${BNDcommands_list})
 
 # make utils visible in cpp

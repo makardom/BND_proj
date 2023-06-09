@@ -40,7 +40,7 @@ endif()
 
 add_library(BND STATIC
         LibraryData.cpp
-        serializer/BinSerializer.cpp)
+        serializer/BinSerializer.cpp UtilsFunctions.hpp)
 
 add_executable(BND_main main.cpp)
 target_link_libraries(BND_main monitor BNDCommands BND)
