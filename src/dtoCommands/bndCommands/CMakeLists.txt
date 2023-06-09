@@ -1,5 +1,6 @@
 SET(bndMethods_list
-        Create.cpp
         BNDCommand.cpp
+        Create.cpp
+        Print.cpp
         )
 add_library(bndMethods STATIC ${bndMethods_list})
