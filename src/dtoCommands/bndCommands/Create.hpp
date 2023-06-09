@@ -5,13 +5,17 @@
 #ifndef BND_CREATE_HPP
 #define BND_CREATE_HPP
 #include "BNDCommand.hpp"
-class Create: BNDCommand{
-private:
-    unsigned short catAmount;
-    unsigned short catOffset;
-public:
-    Create(BND &bnd, unsigned short amount, unsigned short offset);
-    void execute() override;
-    ~Create() override;
-};
+namespace BNDNS {
+    class Create : BNDCommand {
+    private:
+        unsigned short catAmount;
+        unsigned short catOffset;
+    public:
+        Create(BND *bnd, unsigned short amount, unsigned short offset);
+
+        void execute() override;
+
+        ~Create() override;
+    };
+}
 #endif //BND_CREATE_HPP

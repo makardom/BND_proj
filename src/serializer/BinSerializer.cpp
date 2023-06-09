@@ -70,7 +70,7 @@ void BinSerializer::load(BND &bnd){
     file.read(reinterpret_cast<char *>(&catAmount), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&catOffset), sizeof(unsigned short));
     file.read(reinterpret_cast<char *>(&actualAmount), sizeof(unsigned short));
-    Create bndcreate(bnd, catAmount, catOffset);
+    BNDNS::Create bndcreate(&bnd, catAmount, catOffset);
     bndcreate.execute();
     for(int i = 0; i < catOffset; i++){
         int block;

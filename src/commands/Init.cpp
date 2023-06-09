@@ -4,6 +4,8 @@
 #include "Init.h"
 #include "UtilsFunctions.hpp"
 #include "limits"
+#include "../dtoCommands/bndCommands/Create.hpp"
+#include "../dtoCommands/bndCommands/Print.hpp"
 Init::Init(LibraryData &libraryData) : libraryData(libraryData) {}
 
 std::string Init::checkAndAssemble(Parser &parser) {
@@ -69,9 +71,11 @@ std::string Init::setCatalogOffset(const keyArgs_t &keys) {
     return "";
 }
 std::string Init::run() {
-    if (!libraryData.serializer.is_open()){
-        libraryData.serializer.create("bnd.bin");
-    }
+//    if (!libraryData.serializer.is_open()){
+//        libraryData.serializer.create("bnd.bin");
+//    }
+    BNDNS::Create(&libraryData.bnd,3,10).execute();
+    BNDNS::Print(&libraryData.bnd).execute();
 
     std::stringstream str;
     str << "Library data created successfully.";

@@ -1,19 +1,20 @@
 //
 // Created by Makar on 10.05.2023.
 //
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include "CatalogUnit.h"
-using namespace std;
 
 #ifndef BND_PROJ_CATALOG_H
 #define BND_PROJ_CATALOG_H
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <vector>
+#include "CatalogUnit.h"
+using namespace std;
 
 
 class Catalog {
 private:
-    vector<CatalogUnit> records;
+    std::vector<CatalogUnit> records;
     unsigned short size;
 public:
     Catalog(): records(), size(0){}
@@ -21,19 +22,19 @@ public:
     ~Catalog() {
         records.clear();
     }
-    vector<CatalogUnit> &getRecords() {
+    std::vector<CatalogUnit> &getRecords() {
         return records;
     }
-    const vector<CatalogUnit> &getRecords() const{
+    [[nodiscard]] const std::vector<CatalogUnit> &getRecords() const{
         return records;
     }
 
-    unsigned short getSize() const {
+    [[nodiscard]] unsigned short getSize() const {
         return size;
     }
 
 
-    void setRecords(const vector<CatalogUnit> &records) {
+    void setRecords(const std::vector<CatalogUnit> &records) {
         Catalog::records = records;
     }
 

@@ -6,12 +6,16 @@
 #define BND_CATALOGUNITCOMMAND_HPP
 
 #include "dto/CatalogUnit.h"
+namespace CatalogUnitNS {
+    class CatalogUnitCommand {
+    public:
+        CatalogUnit catalogUnit;
 
-class CatalogUnitCommand{
-public:
-    CatalogUnit catalogUnit;
-    explicit CatalogUnitCommand(CatalogUnit &catalogUnit);
-    virtual void execute() = 0;
-    virtual ~CatalogUnitCommand();
-};
+        explicit CatalogUnitCommand(CatalogUnit &catalogUnit): catalogUnit(catalogUnit) {}
+
+        virtual void execute() = 0;
+
+        virtual ~CatalogUnitCommand() = default;
+    };
+}
 #endif //BND_CATALOGUNITCOMMAND_HPP

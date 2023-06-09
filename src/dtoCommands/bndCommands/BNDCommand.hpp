@@ -6,12 +6,16 @@
 #define BND_BNDMETHODS_HPP
 
 #include "dto/BND.h"
+namespace BNDNS {
+    class BNDCommand {
+    public:
+        virtual void execute() = 0;
 
-class BNDCommand{
-public:
-    virtual void execute() = 0;
-    BND bnd;
-    explicit BNDCommand(const BND& bnd);
-    virtual ~BNDCommand();
-};
+        BND *bnd;
+
+        explicit BNDCommand(BND *bnd);
+
+        virtual ~BNDCommand();
+    };
+}
 #endif //BND_BNDMETHODS_HPP
