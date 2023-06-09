@@ -5,7 +5,7 @@
 #include "../exceptions/FileNotFoundException.hpp"
 #include "../exceptions/FileCannotCreate.hpp"
 #include "../exceptions/FileWriteException.hpp"
-#include "dtoCommands/Create.hpp"
+#include "dtoCommands/bndCommands/Create.hpp"
 
 void BinSerializer::open(const std::string &filename) {
     file.open(filename);

@@ -1,5 +1,3 @@
-SET(bndMethods_list
-        Create.cpp
-        BNDCommand.cpp
-        )
-add_library(bndMethods STATIC ${bndMethods_list})
+add_subdirectory(bndCommands)
+add_subdirectory(catalogCommands)
+add_subdirectory(catalogUnitCommands)

@@ -74,14 +74,14 @@ std::string Init::run() {
     }
 
     std::stringstream str;
-    str << "Filesystem created successfully.";
+    str << "Library data created successfully.";
     return str.str();
 }
 std::string Init::getQuery(){
     return "init";
 }
 std::string Init::help() {
-    return "usage: init -a <catalogAmount> -o <catalogOffset> \"LABEL\"";
+    return "usage: init -a <catalogAmount> -o <catalogOffset>";
 }
 
 std::string Init::description() {
