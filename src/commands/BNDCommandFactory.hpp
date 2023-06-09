@@ -17,7 +17,7 @@ public:
     explicit BNDCommandFactory(LibraryData &libraryData) : CommandFactory<CommandClasses>(), libraryData(libraryData){}
 
     std::shared_ptr<BaseCommand> getCommand(const std::string &commandString) override {
-        return CommandFactory<CommandClasses>::construct(commandString, &libraryData);
+        return CommandFactory<CommandClasses>::construct(commandString, libraryData);
     }
 };
 

@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <sstream>
-#include "../cmake-build-debug/_deps/consolemonitor-src/src/commands/Parser.h"
+#include "Parser.h"
 #include "commands/BNDCommands.hpp"
 
 class UtilsFunctions{
@@ -112,5 +112,4 @@ public:
         return str.str();
     }
 };
-
 #endif //BND_UTILSFUNCTIONS_HPP
