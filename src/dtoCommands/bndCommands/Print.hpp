@@ -8,7 +8,7 @@
 namespace BNDNS {
     class Print : BNDCommand {
     public:
-        explicit Print(BND *bnd);
+        explicit Print(BND &bnd);
 
         void execute() override;
 

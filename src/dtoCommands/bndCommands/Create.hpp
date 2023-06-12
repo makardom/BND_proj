@@ -11,7 +11,7 @@ namespace BNDNS {
         unsigned short catAmount;
         unsigned short catOffset;
     public:
-        Create(BND *bnd, unsigned short amount, unsigned short offset);
+        Create(BND &bnd, unsigned short amount, unsigned short offset);
 
         void execute() override;
 

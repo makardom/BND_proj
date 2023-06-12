@@ -74,8 +74,8 @@ std::string Init::run() {
 //    if (!libraryData.serializer.is_open()){
 //        libraryData.serializer.create("bnd.bin");
 //    }
-    BNDNS::Create(&libraryData.bnd,3,10).execute();
-    BNDNS::Print(&libraryData.bnd).execute();
+    BNDNS::Create(libraryData.bnd,3,10).execute();
+    BNDNS::Print(libraryData.bnd).execute();
 
     std::stringstream str;
     str << "Library data created successfully.";

@@ -11,9 +11,9 @@ namespace BNDNS {
     public:
         virtual void execute() = 0;
 
-        BND *bnd;
+        BND &bnd;
 
-        explicit BNDCommand(BND *bnd);
+        explicit BNDCommand(BND &bnd);
 
         virtual ~BNDCommand();
     };

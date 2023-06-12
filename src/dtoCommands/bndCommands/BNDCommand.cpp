@@ -3,7 +3,7 @@
 //
 #include "BNDCommand.hpp"
 namespace BNDNS {
-    BNDCommand::BNDCommand(BND *bnd) : bnd(bnd) {}
+    BNDCommand::BNDCommand(BND &bnd) : bnd(bnd) {}
 
     BNDCommand::~BNDCommand() = default;
 }
