@@ -55,7 +55,7 @@ std::string Add::setLength(const keyArgs_t &keys) {
 }
 std::string Add::setName(const keyArgs_t &keys) {
     string str;
-    if (auto it = keys.find("name"); it != keys.end()) {
+    if (auto it = keys.find("name"); it != keys.end() || ((it = keys.find("n")) != keys.end())) {
         str = it->second;
     }
     else {
@@ -111,7 +111,7 @@ std::string Add::getQuery(){
     return "add";
 }
 std::string Add::help() {
-    return "usage: add -name -l <length>";
+    return "usage: add -n <name> -l <length>";
 }
 
 std::string Add::description() {
