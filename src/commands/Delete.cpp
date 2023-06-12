@@ -39,6 +39,7 @@ std::string Delete::run() {
             CatalogNS::DecSize(libraryData.bnd.getCatalog()).execute();
         }
         libraryData.bnd.getCatalog().getRecords().clear();
+        libraryData.isInit = false;
         str = "Library data has been deleted successfully";
     }catch (IOException &e){
         str = e.what();
