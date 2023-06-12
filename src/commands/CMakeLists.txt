@@ -6,6 +6,7 @@ SET(BNDcommands_list
         Reorganization.cpp
         Delete.cpp
         RenameCatalog.cpp
+        OutSectionAlphabet.cpp
         )
 add_library(BNDCommands STATIC ${BNDcommands_list})
 

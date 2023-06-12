@@ -11,6 +11,7 @@
 #include "BNDCommandFactory.hpp"
 #include "Delete.hpp"
 #include "RenameCatalog.hpp"
+#include "OutSectionAlphabet.hpp"
 
 typedef std::tuple<
     Init,
@@ -18,7 +19,8 @@ typedef std::tuple<
     Add,
     Reorganization,
     Delete,
-    RenameCatalog
+    RenameCatalog,
+    OutSectionAlphabet
 > BNDCommandsTuple;
 
 typedef BNDCommandFactory<BNDCommandsTuple> BNDCommands;
