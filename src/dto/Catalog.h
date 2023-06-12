@@ -11,7 +11,7 @@
 #include "CatalogUnit.h"
 using namespace std;
 
-
+const int BLOCK = 1;
 class Catalog {
 private:
     std::vector<CatalogUnit> records;

@@ -9,7 +9,7 @@
 namespace CatalogNS {
     class CatalogCommand {
     public:
-        Catalog catalog;
+        Catalog &catalog;
 
         explicit CatalogCommand(Catalog &catalog);
 
