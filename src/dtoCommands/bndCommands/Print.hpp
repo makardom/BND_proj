@@ -2,8 +2,8 @@
 // Created by maksi on 09.06.2023.
 //
 
-#ifndef BND_CatalogUnitPRINT_HPP
-#define BND_CatalogUnitPRINT_HPP
+#ifndef BND_PRINT_HPP
+#define BND_PRINT_HPP
 #include "BNDCommand.hpp"
 namespace BNDNS {
     class Print : BNDCommand {
@@ -15,4 +15,4 @@ namespace BNDNS {
         ~Print() override;
     };
 }
-#endif //BND_CatalogUnitPRINT_HPP
+#endif //BND_PRINT_HPP

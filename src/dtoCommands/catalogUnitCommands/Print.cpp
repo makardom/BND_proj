@@ -4,7 +4,7 @@
 #include "Print.hpp"
 namespace CatalogUnitNS {
 //    CatalogUnitNS::Print::Print(CatalogUnit &catalogUnit) : CatalogUnitCommand(catalogUnit) {}
-
+//
 //    void Print::execute() {
 //        string dopname;
 //        for (int i = 0; i < catalogUnit.getNameSize(); i++) {
@@ -12,6 +12,6 @@ namespace CatalogUnitNS {
 //        }
 //        cout << dopname << " " << catalogUnit.getOffset() << " " << catalogUnit.getLength() << " ";
 //    }
-
+//
 //    Print::~Print() = default;
 }

@@ -4,6 +4,5 @@
 #include "CatalogUnitCommand.hpp"
 namespace CatalogUnitNS {
 //    CatalogUnitCommand::CatalogUnitCommand(CatalogUnit &catalogUnit) : catalogUnit(catalogUnit) {}
-//
 //    CatalogUnitCommand::~CatalogUnitCommand() = default;
 }

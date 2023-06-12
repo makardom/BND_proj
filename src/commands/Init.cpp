@@ -6,6 +6,7 @@
 #include "limits"
 #include "../dtoCommands/bndCommands/Create.hpp"
 #include "../dtoCommands/bndCommands/Print.hpp"
+
 Init::Init(LibraryData &libraryData) : libraryData(libraryData) {}
 
 std::string Init::checkAndAssemble(Parser &parser) {
@@ -63,7 +64,7 @@ std::string Init::setCatalogOffset(const keyArgs_t &keys) {
             return CATALOGOFFSET_RESTRICTED;
         }
 
-        catAmount = static_cast<uint16_t>(intCatalogOffset);
+        catOffset = static_cast<uint16_t>(intCatalogOffset);
     } else {
         return NO_CATALOGOFFSET_VALUE;
     }

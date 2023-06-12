@@ -12,9 +12,9 @@ namespace CatalogNS {
     public:
         AddRecord(Catalog &catalog, CatalogUnit &catalogUnit);
 
-        void execute();
+        void execute() override;
 
-        ~AddRecord();
+        ~AddRecord() override;
     };
 }
 #endif //BND_ADDRECORD_HPP

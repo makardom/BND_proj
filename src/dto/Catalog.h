@@ -34,12 +34,12 @@ public:
     }
 
 
-    void setRecords(const std::vector<CatalogUnit> &records) {
-        Catalog::records = records;
+    void setRecords(const std::vector<CatalogUnit> &recordsV) {
+        Catalog::records = recordsV;
     }
 
-    void setSize(unsigned short size) {
-        Catalog::size = size;
+    void setSize(unsigned short sizeUS) {
+        Catalog::size = sizeUS;
     }
 //    void print() {
 //        for (int i = 0; i < size; i++) {

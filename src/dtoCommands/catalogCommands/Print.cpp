@@ -1,8 +1,10 @@
 //
 // Created by maksi on 09.06.2023.
 //
+#include "dtoCommands/catalogUnitCommands/Print.hpp"
+#include "dtoCommands/catalogUnitCommands/DeleteThisUnit.hpp"
 #include "Print.hpp"
-#include "../catalogUnitCommands/Print.hpp"
+
 namespace CatalogNS {
     Print::Print(Catalog &catalog) : CatalogCommand(catalog) {}
 

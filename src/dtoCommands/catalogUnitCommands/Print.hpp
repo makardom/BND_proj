@@ -2,8 +2,8 @@
 // Created by maksi on 09.06.2023.
 //
 
-#ifndef BND_CatalogUnitPRINT_HPP
-#define BND_CatalogUnitPRINT_HPP
+#ifndef BND_CATALOGUNIT_PRINT_HPP
+#define BND_CATALOGUNIT_PRINT_HPP
 #include "CatalogUnitCommand.hpp"
 namespace CatalogUnitNS {
     class Print : CatalogUnitCommand {
@@ -20,6 +20,5 @@ namespace CatalogUnitNS {
 
         ~Print() override = default;
     };
-
-#endif //BND_CatalogUnitPRINT_HPP
 }
+#endif //BND_CATALOGUNIT_PRINT_HPP
