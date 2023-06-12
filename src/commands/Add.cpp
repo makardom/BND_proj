@@ -73,6 +73,9 @@ std::string Add::setName(const keyArgs_t &keys) {
 }
 std::string Add::run() {
     std::string str;
+    if(!libraryData.isInit){
+        return str = "Library data is not initialized!";
+    }
     try {
         if (libraryData.bnd.getCatalog().getSize() == libraryData.bnd.getCatamount()) {
             throw CatalogSpaceFull();

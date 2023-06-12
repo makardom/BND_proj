@@ -73,8 +73,12 @@ std::string Init::setCatalogOffset(const keyArgs_t &keys) {
 }
 std::string Init::run() {
     std::string str;
+    if(libraryData.isInit){
+       return str = "Library data has been already initialized! To create new you need to delete the old one!";
+    }
     try {
         BNDNS::Create(libraryData.bnd,catAmount,catOffset).execute();
+        libraryData.isInit = true;
         str = "Library data created successfully.";
     } catch (IOException &e){
         str = str + e.what();

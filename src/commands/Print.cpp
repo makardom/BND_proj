@@ -23,7 +23,12 @@ std::string Print::checkAmount(const Parser &parser) {
 }
 
 std::string Print::run() {
-    return BNDNS::Print(libraryData.bnd).execute();
+    string str;
+    if(!libraryData.isInit){
+        str = "Library data is not initialized!";
+    }
+    str = BNDNS::Print(libraryData.bnd).execute();
+    return str;
 }
 std::string Print::getQuery(){
     return "print";

@@ -26,6 +26,9 @@ std::string Reorganization::checkAmount(const Parser &parser) {
 
 std::string Reorganization::run() {
     string str;
+    if(!libraryData.isInit){
+        return str = "Library data is not initialized!";
+    }
     try{
         unsigned int offsets[libraryData.bnd.getCatalog().getSize()];
         unsigned int lengths = 0;
