@@ -21,6 +21,7 @@ int main() {
     } catch (FileWriteException &e) {
         std::cerr << "Can't save libraryData state. Check permissions or free space on a disk." << std::endl;
     }
+    libraryData.close();
 
     auto commandFactory = BNDCommands(libraryData);
 #ifdef MONITOR_WITHFILE
@@ -60,6 +61,4 @@ int main() {
         libraryData.close();
         return -3;
     }
-
-    libraryData.close();
 }

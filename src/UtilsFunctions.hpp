@@ -161,5 +161,14 @@ public:
         }
         return -1;
     }
+    static std::string deleteFile(const std::string& filename){
+        std::string str;
+        if (remove(filename.c_str()) != 0) {
+            str = "Error while removing!";
+        } else {
+            str = "File" + filename + " was deleted successfully";
+        }
+        return str;
+    }
 };
 #endif //BND_UTILSFUNCTIONS_HPP

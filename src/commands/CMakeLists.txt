@@ -9,6 +9,8 @@ SET(BNDcommands_list
         OutSectionAlphabet.cpp
         OutFreeSpace.cpp
         DeleteSection.cpp
+        Load.cpp
+        Save.cpp
         )
 add_library(BNDCommands STATIC ${BNDcommands_list})
 
