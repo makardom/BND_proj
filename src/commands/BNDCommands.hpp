@@ -9,12 +9,14 @@
 #include "Add.hpp"
 #include "Reorganization.hpp"
 #include "BNDCommandFactory.hpp"
+#include "Delete.hpp"
 
 typedef std::tuple<
     Init,
     Print,
     Add,
-    Reorganization
+    Reorganization,
+    Delete
 > BNDCommandsTuple;
 
 typedef BNDCommandFactory<BNDCommandsTuple> BNDCommands;

@@ -6,7 +6,7 @@ namespace CatalogNS {
     DecSize::DecSize(Catalog &catalog) : CatalogCommand(catalog) {}
 
     void DecSize::execute() {
-        catalog.setSize(catalog.getSize() + 1);
+        catalog.setSize(catalog.getSize() - 1);
     }
 
     DecSize::~DecSize() = default;
