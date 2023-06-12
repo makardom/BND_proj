@@ -72,35 +72,37 @@ std::string Add::setName(const keyArgs_t &keys) {
     return "";
 }
 std::string Add::run() {
-    if(libraryData.bnd.getCatalog().getSize() == libraryData.bnd.getCatamount()){
+    std::string str;
+    try {
+        if (libraryData.bnd.getCatalog().getSize() == libraryData.bnd.getCatamount()) {
             throw CatalogSpaceFull();
         }
-        if (libraryData.bnd.getDataArea() == nullptr){
+        if (libraryData.bnd.getDataArea() == nullptr) {
             throw CatalogSpaceUnspecified();
         }
-        if (name.length()>10){
+        if (name.length() > 10) {
             throw CatalogNameTooLong();
         }
-        char *charname = new char[name.length()+1];
-        //char name[10]{'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'};
-        for(int i=0; i<name.length(); i++){
-            *(charname+i) = name[i];
-            *(charname+i+1) = '\0';
+        char *charname = new char[name.length() + 1];
+        for (int i = 0; i < name.length(); i++) {
+            *(charname + i) = name[i];
+            *(charname + i + 1) = '\0';
         }
-        int num = UtilsFunctions::findSpace(libraryData.bnd,length);
-        if(num == -1){
+        int num = UtilsFunctions::findSpace(libraryData.bnd, length);
+        if (num == -1) {
             throw BNDCannotAddDataInDataArea();
-        }else{
-            for(int i = num; i<num+length; i++){
-                *(libraryData.bnd.getDataArea()+i) = BLOCK;
+        } else {
+            for (int i = num; i < num + length; i++) {
+                *(libraryData.bnd.getDataArea() + i) = BLOCK;
             }
             CatalogUnit newCatU(charname, num, length);
-            CatalogNS::AddRecord(libraryData.bnd.getCatalog(),newCatU).execute();
+            CatalogNS::AddRecord(libraryData.bnd.getCatalog(), newCatU).execute();
         }
-
-    std::stringstream str;
-    str << "Catalog record was added successfully.";
-    return str.str();
+        str = "Catalog was added successfully";
+    } catch (IOException &e){
+        str = str + e.what();
+    }
+    return str;
 }
 std::string Add::getQuery(){
     return "add";

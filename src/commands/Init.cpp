@@ -72,11 +72,14 @@ std::string Init::setCatalogOffset(const keyArgs_t &keys) {
     return "";
 }
 std::string Init::run() {
-    BNDNS::Create(libraryData.bnd,catAmount,catOffset).execute();
-
-    std::stringstream str;
-    str << "Library data created successfully.";
-    return str.str();
+    std::string str;
+    try {
+        BNDNS::Create(libraryData.bnd,catAmount,catOffset).execute();
+        str = "Library data created successfully.";
+    } catch (IOException &e){
+        str = str + e.what();
+    }
+    return str;
 }
 std::string Init::getQuery(){
     return "init";
