@@ -3,6 +3,7 @@ SET(BNDcommands_list
         Init.cpp
         Print.cpp
         Add.cpp
+        Reorganization.cpp
         )
 add_library(BNDCommands STATIC ${BNDcommands_list})
 

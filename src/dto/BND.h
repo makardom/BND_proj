@@ -82,7 +82,7 @@ public:
     }
 //
 //
-//!!    void print(){
+//    void print(){
 //        cout<<"LB"<<CatOffset<<Catamount<<" ";
 //        for(int i=0; i<CatOffset; i++)
 //            cout<<*(DataArea+i);
@@ -90,7 +90,7 @@ public:
 //        cout<<endl;
 //    }
 //
-//!!    void create(unsigned short catamount, unsigned short dataamount){
+//    void create(unsigned short catamount, unsigned short dataamount){
 //        Catamount = catamount;
 //        CatOffset = dataamount;
 //        DataArea = new int[dataamount]{0};
@@ -98,7 +98,7 @@ public:
 //
 //
 //    //для добавление нужна проверка на наличие свободного места в датаареа, возможность отформатировать пространство для добавления раздела
-//!!    void add(const string &catname, unsigned int length){
+//    void add(const string &catname, unsigned int length){
 //        if(catalog.getSize() == Catamount){
 //            throw CatalogSpaceFull();
 //        }

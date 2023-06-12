@@ -7,12 +7,14 @@
 #include "Init.h"
 #include "Print.h"
 #include "Add.hpp"
+#include "Reorganization.hpp"
 #include "BNDCommandFactory.hpp"
 
 typedef std::tuple<
     Init,
     Print,
-    Add
+    Add,
+    Reorganization
 > BNDCommandsTuple;
 
 typedef BNDCommandFactory<BNDCommandsTuple> BNDCommands;
