@@ -111,5 +111,55 @@ public:
 
         return str.str();
     }
+    static unsigned int lengthSpace(BND &bnd, int k){
+        unsigned int len = 0;
+        do{
+            len++;
+            k++;
+        }while(*(bnd.getDataArea()+k)==0);
+        return len;
+    }
+
+    static int findSpace(BND &bnd, unsigned int need){
+        unsigned int num = 0;
+        for (int i=0; i<bnd.getCatOffset(); i++){
+            if (*(bnd.getDataArea()+i)==0) num++;
+        }
+        if(num < need){
+            return -1;
+        }
+
+        for (int i = 0; i<bnd.getCatOffset(); i++){
+            if(*(bnd.getDataArea()+i)==0)
+                if(lengthSpace(bnd, i) >= need) {
+                    return i;
+                }
+        }
+
+        return -1;
+    }
+
+    static int checkSection(BND &bnd, unsigned int a, const unsigned int *offsets){
+        for(int i=0; i<bnd.getCatalog().getSize(); i++){
+            if (a==offsets[i])
+                return i;
+        }
+        return -1;
+    }
+
+    static void switchData(BND &bnd, int a, int b){
+        auto tmp = bnd.getDataArea()[a];
+        bnd.getDataArea()[a] = bnd.getDataArea()[b];
+        bnd.getDataArea()[b] = tmp;
+    }
+
+    static int checkPosition(const unsigned int *offsets, int n, unsigned int need){
+        for(int i=0; i<n; i++){
+            if (offsets[i]==need){
+                return i;
+            }
+        }
+        return -1;
+    }
 };
 #endif //BND_UTILSFUNCTIONS_HPP

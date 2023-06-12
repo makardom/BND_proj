@@ -7,10 +7,12 @@ namespace CatalogUnitNS {
 //
 //    void Print::execute() {
 //        string dopname;
-//        for (int i = 0; i < catalogUnit.getNameSize(); i++) {
-//            dopname.push_back(catalogUnit.getName()[i]);
-//        }
-//        cout << dopname << " " << catalogUnit.getOffset() << " " << catalogUnit.getLength() << " ";
+//            for (int i = 0; i < catalogUnit.getNameSize(); i++) {
+//                dopname.push_back(catalogUnit.getName()[i]);
+//            }
+//            std::string str;
+//            str = dopname + " " + to_string(catalogUnit.getOffset()) + " " + to_string(catalogUnit.getLength()) + " ";
+//            return str;
 //    }
 //
 //    Print::~Print() = default;

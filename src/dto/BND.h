@@ -82,7 +82,7 @@ public:
     }
 //
 //
-//    void print(){
+//!!    void print(){
 //        cout<<"LB"<<CatOffset<<Catamount<<" ";
 //        for(int i=0; i<CatOffset; i++)
 //            cout<<*(DataArea+i);
@@ -90,7 +90,7 @@ public:
 //        cout<<endl;
 //    }
 //
-//    void create(unsigned short catamount, unsigned short dataamount){
+//!!    void create(unsigned short catamount, unsigned short dataamount){
 //        Catamount = catamount;
 //        CatOffset = dataamount;
 //        DataArea = new int[dataamount]{0};
@@ -98,7 +98,7 @@ public:
 //
 //
 //    //для добавление нужна проверка на наличие свободного места в датаареа, возможность отформатировать пространство для добавления раздела
-//    void add(const string &catname, unsigned int length){
+//!!    void add(const string &catname, unsigned int length){
 //        if(catalog.getSize() == Catamount){
 //            throw CatalogSpaceFull();
 //        }
@@ -128,7 +128,7 @@ public:
 //
 //
 //
-//    void reorganization(){
+//!!    void reorganization(){
 //        unsigned int offsets[catalog.getSize()];
 //        unsigned int lengths = 0;
 //        auto *records = new CatalogUnit[Catamount];
@@ -160,7 +160,7 @@ public:
 //
 //    }
 //
-//    void Delete(){
+//!!    void Delete(){
 //        Catamount = 0;
 //        CatOffset = 0;
 //        delete[] DataArea;
@@ -172,7 +172,7 @@ public:
 //        catalog.getRecords().clear();
 //    }
 //
-//    void renameCatalog(string oldname, string newname){
+//!!    void renameCatalog(string oldname, string newname){
 //        if (newname.length()>10){
 //            throw CatalogNameTooLong();
 //        }
@@ -192,7 +192,7 @@ public:
 //        catalog.searchRecordByName(oldname1)->setName(newname1);
 //    }
 //
-//    void OutFreeSpace(){
+//!!    void OutFreeSpace(){
 //        int kol = 0;
 //        for(int i=0; i<CatOffset; i++){
 //            if (*(DataArea+i)==0)
@@ -206,7 +206,7 @@ public:
 //        cout<<endl;
 //    }
 //
-//    void OutSectionAlphabet(){
+//!!    void OutSectionAlphabet(){
 //        string names[catalog.getSize()];
 //        for (int i=0; i<catalog.getSize(); i++){
 //            names[i] = catalog.getRecords()[i].getName();
@@ -218,7 +218,7 @@ public:
 //        for(auto &i : namevec)
 //            cout<<i<<endl;
 //    }
-//    void DeleteSection(const string& SecName){
+//!!    void DeleteSection(const string& SecName){
 //        if (SecName.length()>10){
 //            throw CatalogNameTooLong();
 //        }

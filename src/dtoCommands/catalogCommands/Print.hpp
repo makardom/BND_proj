@@ -4,15 +4,19 @@
 
 #ifndef BND_CATALOGPRINT_HPP
 #define BND_CATALOGPRINT_HPP
-#include "CatalogCommand.hpp"
+
+#include "dto/Catalog.h"
+
 namespace CatalogNS {
-    class Print : CatalogCommand {
+    class Print {
+    private:
+        Catalog &catalog;
     public:
         explicit Print(Catalog &catalog);
 
-        void execute() override;
+        std::string execute();
 
-        ~Print() override;
+        ~Print();
     };
 }
 #endif //BND_CATALOGPRINT_HPP

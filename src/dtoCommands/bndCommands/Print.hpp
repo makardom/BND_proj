@@ -4,15 +4,19 @@
 
 #ifndef BND_PRINT_HPP
 #define BND_PRINT_HPP
-#include "BNDCommand.hpp"
+
+#include "dto/BND.h"
+
 namespace BNDNS {
-    class Print : BNDCommand {
+    class Print {
+    private:
+        BND &bnd;
     public:
         explicit Print(BND &bnd);
 
-        void execute() override;
+        std::string execute();
 
-        ~Print() override;
+        ~Print();
     };
 }
 #endif //BND_PRINT_HPP

@@ -4,15 +4,17 @@
 #include "../catalogCommands/Print.hpp"
 #include "Print.hpp"
 namespace BNDNS {
-    Print::Print(BND &bnd) : BNDCommand(bnd) {}
+    Print::Print(BND &bnd) : bnd(bnd) {}
 
-    void Print::execute() {
-        cout << "LB" << bnd.getCatOffset() << bnd.getCatamount() << " ";
-        for (int i = 0; i < bnd.getCatOffset(); i++)
-            cout << *(bnd.getDataArea() + i);
-        cout<<" ";
-        CatalogNS::Print(bnd.getCatalog()).execute();
-        cout << endl;
+    std::string Print::execute() {
+        std::string str ="LB" + to_string(bnd.getCatOffset()) + to_string(bnd.getCatamount()) + " ";
+        for (int i = 0; i < bnd.getCatOffset(); i++) {
+            string strchar = to_string(*(bnd.getDataArea() + i));
+            str += strchar;
+        }
+        str += " ";
+        str += CatalogNS::Print(bnd.getCatalog()).execute();
+        return str;
     }
 
     Print::~Print() = default;

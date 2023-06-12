@@ -6,13 +6,15 @@
 #include "Print.hpp"
 
 namespace CatalogNS {
-    Print::Print(Catalog &catalog) : CatalogCommand(catalog) {}
+    Print::Print(Catalog &catalog) : catalog(catalog) {}
 
-    void Print::execute() {
+    std::string Print::execute() {
+        std::string str;
         for (int i = 0; i < catalog.getSize(); i++) {
             CatalogUnitNS::Print catalogUnitPrint(catalog.getRecords().operator[](static_cast<unsigned long long int>(i)));
-            catalogUnitPrint.execute();
+            str += catalogUnitPrint.execute();
         }
+        return str;
     }
 
     Print::~Print() = default;

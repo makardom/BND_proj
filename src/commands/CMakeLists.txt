@@ -1,6 +1,7 @@
 # make library
 SET(BNDcommands_list
-    Init.cpp
+        Init.cpp
+        Print.cpp
         )
 add_library(BNDCommands STATIC ${BNDcommands_list})
 
