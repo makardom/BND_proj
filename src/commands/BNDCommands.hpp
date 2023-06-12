@@ -13,6 +13,7 @@
 #include "RenameCatalog.hpp"
 #include "OutSectionAlphabet.hpp"
 #include "OutFreeSpace.hpp"
+#include "DeleteSection.hpp"
 
 typedef std::tuple<
     Init,
@@ -22,7 +23,8 @@ typedef std::tuple<
     Delete,
     RenameCatalog,
     OutSectionAlphabet,
-    OutFreeSpace
+    OutFreeSpace,
+    DeleteSection
 > BNDCommandsTuple;
 
 typedef BNDCommandFactory<BNDCommandsTuple> BNDCommands;
