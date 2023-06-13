@@ -3,11 +3,15 @@
 //
 #include "../catalogCommands/Print.hpp"
 #include "Print.hpp"
+#include "exceptions/DataAreaIsNotAllocated.hpp"
+
 namespace BNDNS {
     Print::Print(BND &bnd) : bnd(bnd) {}
 
     std::string Print::execute() {
         std::string str ="LB" + to_string(bnd.getCatOffset()) + to_string(bnd.getCatamount()) + " ";
+        if(bnd.getDataArea() == nullptr)
+            throw DataAreaIsNotAllocated();
         for (int i = 0; i < bnd.getCatOffset(); i++) {
             string strchar = to_string(*(bnd.getDataArea() + i));
             str += strchar;

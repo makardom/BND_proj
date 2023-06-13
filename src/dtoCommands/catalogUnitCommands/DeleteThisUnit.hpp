@@ -6,17 +6,19 @@
 #define BND_DELETETHISUNIT_HPP
 #include "CatalogUnitCommand.hpp"
 namespace CatalogUnitNS {
-    class DeleteThisUnit : CatalogUnitCommand {
+    class DeleteThisUnit{
     public:
-        explicit DeleteThisUnit(CatalogUnit &catalogUnit): CatalogUnitCommand(catalogUnit) {}
+        CatalogUnit *catalogUnit;
+        explicit DeleteThisUnit(CatalogUnit *catalogUnit): catalogUnit(catalogUnit) {}
 
-        void execute() override{
-            catalogUnit.setName(new char[10]{'\0'});
-            catalogUnit.setOffset(0);
-            catalogUnit.setLength(0);
+        void execute() const{
+            char * name = new char[10]{'\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'};
+            catalogUnit->setName(name);
+            catalogUnit->setOffset(0);
+            catalogUnit->setLength(0);
         }
 
-        ~DeleteThisUnit() override = default;
+        ~DeleteThisUnit() = default;
     };
 
 #endif //BND_DELETETHISUNIT_HPP

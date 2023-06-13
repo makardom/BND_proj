@@ -2,6 +2,9 @@
 // Created by maksi on 12.06.2023.
 //
 #include "OutSectionAlphabet.hpp"
+#include "exceptions/CatalodMemoryIsNotAllocated.hpp"
+#include "exceptions/CatalogRecordsAreEmpty.hpp"
+
 OutSectionAlphabet::OutSectionAlphabet(LibraryData &libraryData) : libraryData(libraryData) {}
 
 std::string OutSectionAlphabet::checkAndAssemble(Parser &parser) {
@@ -24,6 +27,12 @@ std::string OutSectionAlphabet::run() {
     string str;
     if(!libraryData.isInit){
         return str = "Library data is not initialized!";
+    }
+    if(libraryData.bnd.getCatamount() == 0){
+        throw CatalogMemoryIsNotAllocated();
+    }
+    if(libraryData.bnd.getCatalog().getRecords().empty()){
+        throw CatalogRecordsAreEmpty();
     }
     string names[libraryData.bnd.getCatalog().getSize()];
     for (int i=0; i<libraryData.bnd.getCatalog().getSize(); i++){

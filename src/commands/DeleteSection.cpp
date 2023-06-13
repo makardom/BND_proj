@@ -7,6 +7,9 @@
 #include "dtoCommands/catalogUnitCommands/DeleteThisUnit.hpp"
 #include "dtoCommands/catalogCommands/DecSize.hpp"
 #include "dtoCommands/catalogCommands/MakeNewMassive.hpp"
+#include "exceptions/CatalodMemoryIsNotAllocated.hpp"
+#include "exceptions/CatalogRecordsAreEmpty.hpp"
+#include "exceptions/CatalogNotFound.hpp"
 
 DeleteSection::DeleteSection(LibraryData &libraryData) : libraryData(libraryData) {}
 
@@ -61,18 +64,26 @@ std::string DeleteSection::run() {
         if (name.length()>10){
             throw CatalogNameTooLong();
         }
+        if(libraryData.bnd.getCatamount() == 0){
+            throw CatalogMemoryIsNotAllocated();
+        }
+        if(libraryData.bnd.getCatalog().getRecords().empty()){
+            throw CatalogRecordsAreEmpty();
+        }
         char *namesec = new char[name.length()];
         for(int i=0; i<name.length(); i++){
             *(namesec+i) = name[i];
             *(namesec+i+1) = '\0';
         }
-        unsigned int start =  CatalogNS::SearchRecordByName(libraryData.bnd.getCatalog(), namesec).execute()->getOffset();
-        unsigned int len =  CatalogNS::SearchRecordByName(libraryData.bnd.getCatalog(), namesec).execute()->getLength();
+        CatalogUnit *finded = CatalogNS::SearchRecordByName(libraryData.bnd.getCatalog(), namesec).execute();
+        if(finded == nullptr)
+            throw CatalogNotFound();
+        unsigned int start =  finded->getOffset();
+        unsigned int len =  finded->getLength();
         for(unsigned int i=start; i<start+len; i++){
             *(libraryData.bnd.getDataArea()+i) = 0;
         }
-        CatalogNS::SearchRecordByName catalogSRBN(libraryData.bnd.getCatalog(), namesec);
-        CatalogUnitNS::DeleteThisUnit(*catalogSRBN.execute()).execute();
+        CatalogUnitNS::DeleteThisUnit(finded).execute();
         CatalogNS::DecSize(libraryData.bnd.getCatalog()).execute();
         CatalogNS::MakeNewMassive(libraryData.bnd.getCatalog()).execute();
 

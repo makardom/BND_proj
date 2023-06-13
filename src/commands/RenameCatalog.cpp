@@ -7,6 +7,8 @@
 #include "dtoCommands/catalogCommands/AddRecord.hpp"
 #include "dtoCommands/catalogUnitCommands/Print.hpp"
 #include "dtoCommands/catalogCommands/SearchRecordByName.hpp"
+#include "exceptions/BNDIsEmpty.hpp"
+#include "exceptions/CatalogNotFound.hpp"
 #include <limits>
 
 RenameCatalog::RenameCatalog(LibraryData &libraryData) : libraryData(libraryData) {}
@@ -78,6 +80,8 @@ std::string RenameCatalog::run() {
         return str = "Library data is not initialized!";
     }
     try {
+        if (libraryData.bnd.getCatalog().getSize() == 0)
+            throw BNDIsEmpty();
         if (newname.length()>10){
             throw CatalogNameTooLong();
         }
@@ -94,6 +98,8 @@ std::string RenameCatalog::run() {
             *(newname1+i) = newname[i];
             *(newname1+i+1) = '\0';
         }
+        if (CatalogNS::SearchRecordByName(libraryData.bnd.getCatalog(), oldname1).execute()== nullptr)
+            throw CatalogNotFound();
         CatalogNS::SearchRecordByName(libraryData.bnd.getCatalog(), oldname1).execute()->setName(newname1);
         str = "Catalog name was changed successfully";
     } catch (IOException &e){

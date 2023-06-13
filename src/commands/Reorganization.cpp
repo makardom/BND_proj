@@ -5,6 +5,8 @@
 #include <sstream>
 #include "../dtoCommands/bndCommands/Print.hpp"
 #include "UtilsFunctions.hpp"
+#include "exceptions/CatalodMemoryIsNotAllocated.hpp"
+#include "exceptions/CatalogRecordsAreEmpty.hpp"
 
 Reorganization::Reorganization(LibraryData &libraryData) : libraryData(libraryData) {}
 
@@ -30,6 +32,12 @@ std::string Reorganization::run() {
         return str = "Library data is not initialized!";
     }
     try{
+        if(libraryData.bnd.getCatamount() == 0){
+            throw CatalogMemoryIsNotAllocated();
+        }
+        if(libraryData.bnd.getCatalog().getRecords().empty()){
+            throw CatalogRecordsAreEmpty();
+        }
         unsigned int offsets[libraryData.bnd.getCatalog().getSize()];
         unsigned int lengths = 0;
         auto *records = new CatalogUnit[libraryData.bnd.getCatamount()];

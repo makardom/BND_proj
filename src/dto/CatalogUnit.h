@@ -30,8 +30,14 @@ public:
     }
 
     void setName(const char *n) {
-        for(int i=0; i< getsize(n); i++){
-            name[i] = *(n+i);
+        int size = getsize(name);
+        for(int i=0; i< size; i++){
+            name[i] = '\0';
+        }
+        if(getsize(n) != 0){
+            for (int i = 0; i < getsize(n); i++) {
+                name[i] = *(n + i);
+            }
         }
     }
 
@@ -60,21 +66,6 @@ public:
         return length;
     }
 
-//    void DeleteThisUnit(){
-//        for(char & i : name){
-//            i = '\0';
-//        }
-//        offset = 0;
-//        length = 0;
-//    }
-//
-//    void print() {
-//        string dopname;
-//        for(char i : name){
-//            dopname.push_back(i);
-//        }
-//        cout <<dopname<< " " << offset << " " << length<< " ";
-//    }
 };
 
 

@@ -2,6 +2,8 @@
 // Created by maksi on 12.06.2023.
 //
 #include "OutFreeSpace.hpp"
+#include "exceptions/DataAreaIsNotAllocated.hpp"
+
 OutFreeSpace::OutFreeSpace(LibraryData &libraryData) : libraryData(libraryData) {}
 
 std::string OutFreeSpace::checkAndAssemble(Parser &parser) {
@@ -24,6 +26,12 @@ std::string OutFreeSpace::run() {
     string str;
     if(!libraryData.isInit){
         return str = "Library data is not initialized!";
+    }
+    if (libraryData.bnd.getCatOffset() == 0){
+        throw DataAreaIsNotAllocated();
+    }
+    if (libraryData.bnd.getDataArea() == nullptr){
+        throw DataAreaIsNotAllocated();
     }
     int kol = 0;
         for(int i=0; i<libraryData.bnd.getCatOffset(); i++){
