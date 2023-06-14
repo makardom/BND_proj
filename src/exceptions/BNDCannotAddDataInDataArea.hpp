@@ -8,7 +8,7 @@
 #define BND_PROJ_BNDCANNOTADDDATAINDATAAREA_HPP
 #include "IOException.hpp"
 /**
- * \class BNDCannotAddDataInDataArea
+ * @class BNDCannotAddDataInDataArea
  * @brief Возникает исключение, когда невозможно добавить данные в область данных.
  */
 class BNDCannotAddDataInDataArea : public IOException {

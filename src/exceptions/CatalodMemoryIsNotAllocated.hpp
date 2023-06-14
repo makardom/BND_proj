@@ -10,7 +10,7 @@
 #define BND_CATALODMEMORYISNOTALLOCATED_HPP
 #include "IOException.hpp"
 /**
- * \class CatalogMemoryIsNotAllocated
+ * @class CatalogMemoryIsNotAllocated
  * @brief Возникает исключение, когда не выделена пямять под каталог
  */
 class CatalogMemoryIsNotAllocated : public IOException {

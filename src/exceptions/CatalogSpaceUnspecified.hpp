@@ -10,7 +10,7 @@
 #define BND_PROJ_CATALOGSPACEUNSPECIFIED_HPP
 #include "IOException.hpp"
 /**
- * \class CatalogSpaceUnspecified
+ * @class CatalogSpaceUnspecified
  * @brief Возникает исключение, когда каталог не инициализирован
  */
 class CatalogSpaceUnspecified : public IOException {

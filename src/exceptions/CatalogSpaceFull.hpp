@@ -10,7 +10,7 @@
 #define BND_PROJ_CATALOGSPACEFULL_HPP
 #include "IOException.hpp"
 /**
- * \class CatalogSpaceFull
+ * @class CatalogSpaceFull
  * @brief Возникает исключение, когда каталог заполнен
  */
 class CatalogSpaceFull : public IOException {

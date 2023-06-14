@@ -10,7 +10,7 @@
 #define BND_PROJ_FILEWRITEEXCEPTION_HPP
 #include "IOException.hpp"
 /**
- * \class FileWriteException
+ * @class FileWriteException
  * @brief Возникает исключение, когда невозможно записать в файл
  */
 class FileWriteException : public IOException {

@@ -10,7 +10,7 @@
 #define BND_DATAAREAISNOTALLOCATED_HPP
 #include "IOException.hpp"
 /**
- * \class DataAreaIsNotAllocated
+ * @class DataAreaIsNotAllocated
  * @brief Возникает исключение, когда не выделена пямять под DataArea
  */
 class DataAreaIsNotAllocated : public IOException {

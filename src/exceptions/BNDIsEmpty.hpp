@@ -10,7 +10,7 @@
 #define BND_BNDISEMPTY_HPP
 #include "IOException.hpp"
 /**
- * \class BNDIsEmpty
+ * @class BNDIsEmpty
 
  * @brief Возникает исключение, когда БНД пустой
  */

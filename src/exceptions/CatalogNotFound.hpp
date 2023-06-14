@@ -10,7 +10,7 @@
 #define BND_CATALOGNOTFOUND_HPP
 #include "IOException.hpp"
 /**
- * \class CatalogNotFound
+ * @class CatalogNotFound
  * @brief Возникает исключение, когда не найден каталог
  */
 class CatalogNotFound : public IOException {

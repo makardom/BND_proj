@@ -3,7 +3,7 @@
 //
 /**
  * @file IOException.hpp
- * \brief Определение класса IOException.
+ * @brief Определение класса IOException.
  *
  * Этот файл содержит определение класса IOException, производного от std::exception.
  */
@@ -11,7 +11,7 @@
 #define BND_PROJ_IOEXCEPTION_HPP
 #include <exception>
 /**
- * \class IOException
+ * @class IOException
  * @brief Базовый класс для всех исключений, связанных с вводом/выводом.
  *
  * Это производный класс от std::exception, представляющий любое исключение, связанное с вводом/выводом

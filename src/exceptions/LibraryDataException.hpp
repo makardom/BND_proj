@@ -2,8 +2,8 @@
 // Created by maksi on 09.06.2023.
 //
 /**
- * \file LibraryDataException.hpp
- *  \brief Определение класса LibraryDataException.
+ * @file LibraryDataException.hpp
+ *  @brief Определение класса LibraryDataException.
  *
  * Этот файл содержит определение класса LibraryDataException, производного от std::exception.
  */
@@ -11,8 +11,8 @@
 #define BND_LIBRARYDATAEXCEPTION_HPP
 #include <exception>
 /**
- * \class LibraryDataException
- * \brief Объявление класса LibraryDataException.
+ * @class LibraryDataException
+ * @brief Объявление класса LibraryDataException.
  *
  * Это производный класс от std::exception, представляющий любое исключение, которое может возникнуть в библиотечных данных.
  */

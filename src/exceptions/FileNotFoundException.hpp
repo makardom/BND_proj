@@ -10,7 +10,7 @@
 #define BND_PROJ_FILENOTFOUNDEXCEPTION_HPP
 #include "IOException.hpp"
 /**
- * \class FileNotFoundException
+ * @class FileNotFoundException
  * @brief Возникает исключение, когда файл не найден
  */
 class FileNotFoundException : public IOException {
