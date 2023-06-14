@@ -9,6 +9,7 @@
 #ifndef BND_BNDISEMPTY_HPP
 #define BND_BNDISEMPTY_HPP
 #include "IOException.hpp"
+
 /**
  * @class BNDIsEmpty
 
@@ -16,6 +17,7 @@
  */
 class BNDIsEmpty : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

@@ -10,6 +10,7 @@
 #ifndef BND_LIBRARYDATAEXCEPTION_HPP
 #define BND_LIBRARYDATAEXCEPTION_HPP
 #include <exception>
+
 /**
  * @class LibraryDataException
  * @brief Объявление класса LibraryDataException.

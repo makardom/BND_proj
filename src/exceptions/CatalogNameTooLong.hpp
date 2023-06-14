@@ -9,12 +9,14 @@
 #ifndef BND_PROJ_CATALOGNAMETOOLONG_HPP
 #define BND_PROJ_CATALOGNAMETOOLONG_HPP
 #include "IOException.hpp"
+
 /**
  * @class CatalogNameTooLong
  * @brief Возникает исключение, когда имя каталога слишком длинное
  */
 class CatalogNameTooLong : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

@@ -9,12 +9,14 @@
 #ifndef BND_PROJ_BNDIMPOSSIBLETOREORGANIZE_HPP
 #define BND_PROJ_BNDIMPOSSIBLETOREORGANIZE_HPP
 #include "IOException.hpp"
+
 /**
  * @class BNDImpossibleToReorganize
  * @brief Возникает исключение, когда невозможно реорганизовать DataArea
  */
 class BNDImpossibleToReorganize : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

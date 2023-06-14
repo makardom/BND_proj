@@ -9,12 +9,14 @@
 #ifndef BND_CATALODMEMORYISNOTALLOCATED_HPP
 #define BND_CATALODMEMORYISNOTALLOCATED_HPP
 #include "IOException.hpp"
+
 /**
  * @class CatalogMemoryIsNotAllocated
  * @brief Возникает исключение, когда не выделена пямять под каталог
  */
 class CatalogMemoryIsNotAllocated : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

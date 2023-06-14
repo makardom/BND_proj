@@ -9,12 +9,14 @@
 #ifndef BND_CATALOGRECORDSAREEMPTY_HPP
 #define BND_CATALOGRECORDSAREEMPTY_HPP
 #include "IOException.hpp"
+
 /**
  * @class CatalogRecordsAreEmpty
  * @brief Возникает исключение, когда в каталоге нет ни одной записи
  */
 class CatalogRecordsAreEmpty : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

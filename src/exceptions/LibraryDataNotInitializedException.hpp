@@ -10,6 +10,7 @@
 #ifndef BND_LIBRARYDATANOTINITIALIZEDEXCEPTION_HPP
 #define BND_LIBRARYDATANOTINITIALIZEDEXCEPTION_HPP
 #include "LibraryDataException.hpp"
+
 /**
  * @class LibraryDataNotInitializedException
  * @brief Объявление класса LibraryDataCorruptedException.
@@ -18,6 +19,7 @@
  */
 class LibraryDataNotInitializedException : public LibraryDataException {
 public:
+
     /**
      * @brief Возвращает описание исключения.
      *

@@ -10,6 +10,7 @@
 #ifndef BND_PROJ_IOEXCEPTION_HPP
 #define BND_PROJ_IOEXCEPTION_HPP
 #include <exception>
+
 /**
  * @class IOException
  * @brief Базовый класс для всех исключений, связанных с вводом/выводом.

@@ -11,6 +11,7 @@
 #ifndef BND_LIBRARYDATACORRUPTEDEXCEPTION_HPP
 #define BND_LIBRARYDATACORRUPTEDEXCEPTION_HPP
 #include "LibraryDataException.hpp"
+
 /**
  * @class LibraryDataCorruptedException
  * @brief Объявление класса LibraryDataCorruptedException.
@@ -19,6 +20,7 @@
  */
 class LibraryDataCorruptedException : public LibraryDataException {
 public:
+
     /**
      * @brief Возвращает описание исключения.
      *

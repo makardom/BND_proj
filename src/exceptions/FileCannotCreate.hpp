@@ -9,12 +9,14 @@
 #ifndef BND_PROJ_FILECANNOTCREATE_HPP
 #define BND_PROJ_FILECANNOTCREATE_HPP
 #include "IOException.hpp"
+
 /**
  * @class FileCannotCreate
  * @brief Возникает исключение, когда невозможно реорганизовать DataArea
  */
 class FileCannotCreate : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

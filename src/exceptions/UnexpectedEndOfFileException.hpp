@@ -9,12 +9,14 @@
 #ifndef BND_UNEXPECTEDENDOFFILEEXCEPTION_HPP
 #define BND_UNEXPECTEDENDOFFILEEXCEPTION_HPP
 #include "IOException.hpp"
+
 /**
  * @class UnexpectedEndOfFileException
  * @brief Возникает исключение, когда невозможно реорганизовать DataArea
  */
 class UnexpectedEndOfFileException : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *

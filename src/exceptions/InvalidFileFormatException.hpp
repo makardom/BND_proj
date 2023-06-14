@@ -9,12 +9,14 @@
 #ifndef BND_INVALIDFILEFORMATEXCEPTION_HPP
 #define BND_INVALIDFILEFORMATEXCEPTION_HPP
 #include "IOException.hpp"
+
 /**
  * @class InvalidFileFormatException
  * @brief Возникает исключение, когда формат файла не правильный
  */
 class InvalidFileFormatException : public IOException {
 public:
+
     /**
     * @brief Возвращает описательную строку исключения
     *
