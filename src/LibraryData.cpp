@@ -12,7 +12,7 @@ void LibraryData::open(const std::string& filename){
     try {
         serializer.open(filename);
     } catch (FileNotFoundException &e){
-        throw FilesystemNotInitializedException();
+        throw LibraryDataNotInitializedException();
     }
     try {
         serializer.load(bnd);
