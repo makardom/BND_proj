@@ -111,6 +111,7 @@ public:
 
         return str.str();
     }
+
     static unsigned int lengthSpace(BND &bnd, int k){
         unsigned int len = 0;
         do{
