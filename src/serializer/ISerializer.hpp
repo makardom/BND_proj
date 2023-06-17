@@ -56,10 +56,10 @@ public:
     virtual void save(CatalogUnit &catalogUnit, off_t offset) = 0;
 
     /**
-   * @brief Сохраняет объект Каталога в текущий открытый файл с указанным смещением.
-   * @param catalog Объект для сохранения.
-   * @param offset Смещение, по которому будет сохранен объект.
-   */
+    * @brief Сохраняет объект Каталога в текущий открытый файл с указанным смещением.
+    * @param catalog Объект для сохранения.
+    * @param offset Смещение, по которому будет сохранен объект.
+    */
     virtual void save(const Catalog &catalog, off_t offset) = 0;
 
     /**
