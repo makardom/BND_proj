@@ -94,10 +94,10 @@ std::string DeleteSection::run() {
     return str;
 }
 std::string DeleteSection::getQuery(){
-    return "deletecatalog";
+    return "deletesection";
 }
 std::string DeleteSection::help() {
-    return "usage: deletecatalog -n <name>";
+    return "usage: deletesection -n <name>";
 }
 
 std::string DeleteSection::description() {
