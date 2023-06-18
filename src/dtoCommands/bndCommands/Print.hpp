@@ -8,14 +8,28 @@
 #include "dto/BND.h"
 
 namespace BNDNS {
+    /**
+    * @class Print
+    * @brief Выводит БНД
+    * @details реализует метод execute().
+    */
     class Print {
     private:
-        BND &bnd;
+        BND &bnd;/**< Объявление ссылки на объект класса BND*/
     public:
+        /**
+        * @brief Конструктор класса Print с параметрами
+        * @param bnd Ссылка на объект класса BND
+        */
         explicit Print(BND &bnd);
-
+        /**
+        * @brief Выполняет команду печати информации о БНД
+        * @return Строка с информацией о файле .bn
+        */
         std::string execute();
-
+        /**
+        * @brief Деструктор класса Print
+        */
         ~Print();
     };
 }

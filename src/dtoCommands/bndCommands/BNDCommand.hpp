@@ -7,14 +7,27 @@
 
 #include "dto/BND.h"
 namespace BNDNS {
+    /**
+    * @class BNDCommand
+    * @brief Абстрактный базовый класс BNDCommand
+    */
     class BNDCommand {
     public:
+        /**
+        * @brief Объявление чисто виртуальной функции execute
+        */
         virtual void execute() = 0;
 
-        BND &bnd;
+        BND &bnd;/**< Объявление ссылки на объект класса BND*/
 
+        /**
+        * @brief Конструктор класса BNDCommand с параметрами
+        * @param bnd Ссылка на объект класса BND
+        */
         explicit BNDCommand(BND &bnd);
-
+        /**
+        * @brief Виртуальный деструктор класса BNDCommand
+        */
         virtual ~BNDCommand();
     };
 }
