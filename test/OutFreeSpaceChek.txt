@@ -1,0 +1,6 @@
+BND> Library data created successfully.
+BND> Catalog was added successfully
+BND> Catalog was added successfully
+BND> Catalog was added successfully
+BND> Amount free space: 2
+BND> Exit message

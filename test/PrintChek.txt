@@ -1,0 +1,6 @@
+BND> Library data created successfully.
+BND> Catalog was added successfully
+BND> Catalog was added successfully
+BND> Catalog was added successfully
+BND> LB103 1111111100 kat1 0 2 kat2 2 4 kat3 6 2
+BND> Exit message

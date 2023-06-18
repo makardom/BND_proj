@@ -43,7 +43,7 @@ std::string OutSectionAlphabet::run() {
         namevec.push_back(i);
     sort(namevec.begin(), namevec.end());
     for(auto &i : namevec)
-        str += i + " ";
+        str += " " + i;
     return str;
 }
 std::string OutSectionAlphabet::getQuery(){

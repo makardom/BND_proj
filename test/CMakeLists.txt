@@ -19,7 +19,7 @@ include(GoogleTest)
 add_executable(
         BND_tests
         commandFactoryTest.cpp
-)
+        TestFunctions.hpp)
 target_link_libraries(
         BND_tests
         GTest::gtest_main

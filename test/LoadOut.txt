@@ -1,0 +1,2 @@
+BND> Library data was loaded successfully
+BND> Exit message
