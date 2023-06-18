@@ -1,0 +1,5 @@
+init -o 10 -a 3
+add -n "kat1" -l 2
+add -n "kat2" -l 4
+add -n "kat3" -l 2
+delete

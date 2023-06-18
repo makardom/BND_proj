@@ -5,7 +5,7 @@
 #include "LibraryData.hpp"
 #include "exceptions/FileWriteException.hpp"
 #include "exceptions/LibraryDataException.hpp"
-
+#define MONITOR_WITHFILE ;
 int main() {
     BinSerializer serializer;
 
@@ -25,17 +25,15 @@ int main() {
 
     auto commandFactory = BNDCommands(libraryData);
 #ifdef MONITOR_WITHFILE
-    std::ifstream istream("input.txt");
+    std::ifstream istream("input1.txt");
     if(!istream.is_open()){
-        std::cerr << "Can't find input file: input.txt" << std::endl;
-        filesystem.close();
+        std::cerr << "Can't find input file: input1.txt" << std::endl;
         return -7;
     }
 
-    std::ofstream ostream("output.txt");
+    std::ofstream ostream("output1.txt");
     if(!ostream.is_open()){
-        std::cerr << "Can't find output file: output.txt" << std::endl;
-        filesystem.close();
+        std::cerr << "Can't find output file: output1.txt" << std::endl;
         return -8;
     }
 
