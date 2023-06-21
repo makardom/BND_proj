@@ -1,2 +1,4 @@
 BND> Library data created successfully.
+BND> Library data has been already initialized! To create new you need to delete the old one!
+BND> Library data has been already initialized! To create new you need to delete the old one!
 BND> Exit message

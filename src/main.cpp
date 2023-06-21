@@ -5,7 +5,7 @@
 #include "LibraryData.hpp"
 #include "exceptions/FileWriteException.hpp"
 #include "exceptions/LibraryDataException.hpp"
-#define MONITOR_WITHFILE ;
+//#define MONITOR_WITHFILE ;
 int main() {
     BinSerializer serializer;
 

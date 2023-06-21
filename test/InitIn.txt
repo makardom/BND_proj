@@ -1,1 +1,3 @@
 init -o 10 -a 3
+init -o 10 -a 3
+init -o 10 -a 3
